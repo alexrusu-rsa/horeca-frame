@@ -272,10 +272,11 @@ export class App {
         if (key === 'period') {
           const [year, month, day] = value.split('-');
           if (year && month && day) {
-            encoded.set(entryId, `${day}/${month}/${year}`);
-            encoded.set(`${entryId}_year`, year);
-            encoded.set(`${entryId}_month`, month);
-            encoded.set(`${entryId}_day`, day);
+            // Google Forms date fields require separate _year/_month/_day params.
+            // Month and day must be numeric strings without leading zeros.
+            encoded.set(`${entryId}_year`, String(parseInt(year, 10)));
+            encoded.set(`${entryId}_month`, String(parseInt(month, 10)));
+            encoded.set(`${entryId}_day`, String(parseInt(day, 10)));
             continue;
           }
         }
@@ -290,19 +291,13 @@ export class App {
     const encodedPayload = this.buildGoogleFormPayload(payload);
     const body = encodedPayload.toString();
 
-    if (typeof navigator.sendBeacon === 'function') {
-      const blob = new Blob([body], {
-        type: 'application/x-www-form-urlencoded;charset=UTF-8',
-      });
-      navigator.sendBeacon(this.googleFormResponseUrl, blob);
-      return;
-    }
-
+    // sendBeacon is unreliable for cross-origin Google Forms submissions and can
+    // silently drop requests. Use fetch with no-cors instead.
     fetch(this.googleFormResponseUrl, {
       method: 'POST',
       mode: 'no-cors',
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+        'Content-Type': 'application/x-www-form-urlencoded',
       },
       body,
       keepalive: true,
