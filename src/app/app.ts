@@ -39,28 +39,16 @@ export class App {
   protected selectedPackage: PackageOffer | null = null;
   protected readonly isSubmitting = signal(false);
   protected readonly submissionError = signal<string | null>(null);
-  protected readonly useBookingMockData = true;
-  protected readonly bookingMockData = this.useBookingMockData
-    ? {
-        contactPerson: 'Alex Rusu',
-        propertyName: 'Pensiunea Demo',
-        email: 'alex@example.com',
-        phone: '+40 712 345 678',
-        listingUrl: 'https://example.com/property/demo',
-        location: 'Brasov',
-        period: '2026-06-15',
-        notes: 'Access after 10:00, parking near reception.',
-      }
-    : {
-        contactPerson: '',
-        propertyName: '',
-        email: '',
-        phone: '',
-        listingUrl: '',
-        location: '',
-        period: '',
-        notes: '',
-      };
+  protected readonly bookingPlaceholders = {
+    contactPerson: 'Nume complet',
+    propertyName: 'Nume proprietate',
+    email: 'email@exemplu.com',
+    phone: '+40 7xx xxx xxx',
+    listingUrl: 'https://site-ul-tau.ro',
+    location: 'Oras / zona',
+    period: 'YYYY-MM-DD',
+    notes: 'Detalii suplimentare (acces, program, observatii)',
+  };
 
   protected readonly heroImage = {
     src: 'photos/Pensiunea Sophia-34.jpg',
@@ -201,7 +189,6 @@ export class App {
     this.isBookingModalOpen = true;
     this.bookingStep = 1;
     this.submissionError.set(null);
-    this.queueApplyBookingMockData();
     this.queueFocusCurrentStepField();
   }
 
@@ -338,37 +325,6 @@ export class App {
     }
 
     return true;
-  }
-
-  private queueApplyBookingMockData(): void {
-    if (!this.useBookingMockData) {
-      return;
-    }
-
-    requestAnimationFrame(() => {
-      const form = document.querySelector<HTMLFormElement>('.booking-form');
-      if (!form) {
-        return;
-      }
-
-      this.setFormFieldValue(form, 'contactPerson', this.bookingMockData.contactPerson);
-      this.setFormFieldValue(form, 'propertyName', this.bookingMockData.propertyName);
-      this.setFormFieldValue(form, 'email', this.bookingMockData.email);
-      this.setFormFieldValue(form, 'phone', this.bookingMockData.phone);
-      this.setFormFieldValue(form, 'listingUrl', this.bookingMockData.listingUrl);
-      this.setFormFieldValue(form, 'location', this.bookingMockData.location);
-      this.setFormFieldValue(form, 'period', this.bookingMockData.period);
-      this.setFormFieldValue(form, 'notes', this.bookingMockData.notes);
-    });
-  }
-
-  private setFormFieldValue(form: HTMLFormElement, fieldName: string, value: string): void {
-    const field = form.elements.namedItem(fieldName) as HTMLInputElement | HTMLTextAreaElement | null;
-    if (!field) {
-      return;
-    }
-
-    field.value = value;
   }
 
   private launchConfetti(): void {
