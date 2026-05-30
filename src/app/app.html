@@ -211,7 +211,7 @@
             {{ 'BOOKING_MODAL.INTRO' | translate }}
           </p>
 
-          <form #bookingForm class="booking-form" novalidate>
+          <form #bookingForm class="booking-form" novalidate (keydown.enter)="handleFieldEnter($event, bookingForm)" (focusin)="onBookingFieldFocus($event)">
             <section class="booking-step" [hidden]="bookingStep !== 1" aria-labelledby="booking-step-contact">
               <h3 id="booking-step-contact" class="booking-step-heading">{{ 'BOOKING_MODAL.STEP_CONTACT' | translate }}</h3>
 
@@ -222,22 +222,22 @@
 
               <label>
                 {{ 'BOOKING_MODAL.FIELD_CONTACT' | translate }}
-                <input type="text" name="contactPerson" required />
+                <input type="text" name="contactPerson" required enterkeyhint="next" />
               </label>
 
               <label>
                 {{ 'BOOKING_MODAL.FIELD_PROPERTY' | translate }}
-                <input type="text" name="propertyName" required />
+                <input type="text" name="propertyName" required enterkeyhint="next" />
               </label>
 
               <label>
                 {{ 'BOOKING_MODAL.FIELD_EMAIL' | translate }}
-                <input type="email" name="email" required />
+                <input type="email" name="email" required enterkeyhint="next" />
               </label>
 
               <label>
                 {{ 'BOOKING_MODAL.FIELD_PHONE' | translate }}
-                <input type="tel" name="phone" required />
+                <input type="tel" name="phone" required enterkeyhint="next" />
               </label>
             </section>
 
@@ -246,17 +246,17 @@
 
               <label>
                 {{ 'BOOKING_MODAL.FIELD_URL' | translate }}
-                <input type="url" name="listingUrl" [placeholder]="'BOOKING_MODAL.PLACEHOLDER_URL' | translate" />
+                <input type="url" name="listingUrl" [placeholder]="'BOOKING_MODAL.PLACEHOLDER_URL' | translate" enterkeyhint="next" />
               </label>
 
               <label>
                 {{ 'BOOKING_MODAL.FIELD_LOCATION' | translate }}
-                <input type="text" name="location" />
+                <input type="text" name="location" enterkeyhint="next" />
               </label>
 
               <label>
                 {{ 'BOOKING_MODAL.FIELD_PERIOD' | translate }}
-                <input type="date" name="period" required />
+                <input type="date" name="period" required enterkeyhint="next" />
               </label>
             </section>
 
@@ -265,7 +265,7 @@
 
               <label>
                 {{ 'BOOKING_MODAL.FIELD_NOTES' | translate }}
-                <textarea name="notes" rows="4" [placeholder]="'BOOKING_MODAL.PLACEHOLDER_NOTES' | translate"></textarea>
+                <textarea name="notes" rows="4" [placeholder]="'BOOKING_MODAL.PLACEHOLDER_NOTES' | translate" enterkeyhint="done"></textarea>
               </label>
             </section>
 

@@ -516,12 +516,15 @@ h3 {
   display: grid;
   place-items: center;
   padding: 1rem;
+  /* Keep modal scrollable and avoid background scroll chaining when mobile keyboard opens. */
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
 .booking-modal {
   width: min(620px, 100%);
-  height: min(90dvh, 680px);
-  overflow: hidden;
+  max-height: min(90dvh, 680px);
+  overflow-y: auto;
   position: relative;
   border: 1px solid var(--line);
   border-radius: 20px;
@@ -796,7 +799,7 @@ h3 {
 
   .booking-modal {
     width: 100%;
-    height: min(94dvh, 700px);
+    max-height: calc(100dvh - 1rem);
     padding: 0.85rem;
   }
 
