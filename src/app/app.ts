@@ -354,7 +354,8 @@ export class App {
 
   private submitWithHiddenIframe(encodedPayload: URLSearchParams): void {
     const iframeName = 'google-form-submit-target';
-    let iframe = document.querySelector<HTMLIFrameElement>(`iframe[name="${iframeName}"]`);
+    const targetElement = document.getElementsByName(iframeName).item(0);
+    let iframe = targetElement instanceof HTMLIFrameElement ? targetElement : null;
     if (!iframe) {
       iframe = document.createElement('iframe');
       iframe.name = iframeName;
@@ -379,7 +380,7 @@ export class App {
 
     document.body.appendChild(form);
     form.submit();
-    form.remove();
+    window.setTimeout(() => form.remove(), 1000);
   }
 
   private launchConfetti(): void {
