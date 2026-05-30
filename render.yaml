@@ -1,8 +1,10 @@
-staticSites:
-  - name: accommodation-photo-landing
+services:
+  - type: web
+    name: accommodation-photo-landing
+    env: static
     rootDir: .
     buildCommand: npm ci && npm run build
-    publishPath: dist/accommodation-photo-landing/browser
+    staticPublishPath: dist/accommodation-photo-landing/browser
     routes:
       - type: rewrite
         source: /*
