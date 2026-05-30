@@ -1,0 +1,9 @@
+staticSites:
+  - name: accommodation-photo-landing
+    rootDir: .
+    buildCommand: npm ci && npm run build
+    publishPath: dist/accommodation-photo-landing/browser
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
