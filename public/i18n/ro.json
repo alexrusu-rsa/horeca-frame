@@ -78,6 +78,11 @@
   "BOOKING_MODAL": {
     "HEADING": "Incepe rezervarea",
     "INTRO": "Completeaza aceste detalii si trimite direct. Cererea ta este transmisa automat.",
+    "STEP_STATUS": "Pasul {{current}} din {{total}}",
+    "STEP_CONTACT": "Contact",
+    "STEP_LOCATION_PERIOD": "Locatie si perioada",
+    "STEP_EXTRA": "Extra detalii",
+    "STEP_SUCCESS": "Final",
     "FIELD_PACKAGE": "Pachet ales",
     "FIELD_CONTACT": "Persoana contact",
     "FIELD_PROPERTY": "Nume pensiune",
@@ -89,8 +94,12 @@
     "FIELD_NOTES": "Alte informatii",
     "PLACEHOLDER_URL": "https://",
     "PLACEHOLDER_NOTES": "Detalii despre timing, acces sau proprietate",
-    "CTA_CONTINUE": "Submit",
-    "CTA_CANCEL": "Close"
+    "CTA_BACK": "Inapoi",
+    "CTA_NEXT": "Continua",
+    "CTA_SUBMIT": "Submit",
+    "SUCCESS_TITLE": "Felicitari!",
+    "SUCCESS_TEXT": "Cererea ta a fost trimisa cu succes. Revenim cat mai curand cu detaliile urmatoare.",
+    "CTA_CLOSE": "Close"
   },
   "A11Y": {
     "PLATFORMS": "Platforme de listare suportate",

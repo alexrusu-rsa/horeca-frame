@@ -23,6 +23,8 @@ type PackageOffer = {
 export class App {
   protected readonly year = new Date().getFullYear();
   protected isBookingModalOpen = false;
+  protected bookingStep = 1;
+  protected readonly totalBookingSteps = 4;
   protected selectedPackage: PackageOffer | null = null;
 
   protected readonly googleFormBaseUrl =
@@ -178,10 +180,12 @@ export class App {
   protected openBookingModal(pack: PackageOffer): void {
     this.selectedPackage = pack;
     this.isBookingModalOpen = true;
+    this.bookingStep = 1;
   }
 
   protected closeBookingModal(): void {
     this.isBookingModalOpen = false;
+    this.bookingStep = 1;
     this.selectedPackage = null;
   }
 
@@ -191,9 +195,33 @@ export class App {
     }
   }
 
-  protected async submitBookingLead(event: SubmitEvent): Promise<void> {
-    event.preventDefault();
-    const form = event.target as HTMLFormElement;
+  protected nextBookingStep(form: HTMLFormElement): void {
+    if (this.bookingStep === 1) {
+      const isValid = this.validateFormFields(form, ['contactPerson', 'propertyName', 'email', 'phone']);
+      if (!isValid) {
+        return;
+      }
+    }
+
+    if (this.bookingStep === 2) {
+      const isValid = this.validateFormFields(form, ['listingUrl', 'period']);
+      if (!isValid) {
+        return;
+      }
+    }
+
+    this.bookingStep = Math.min(3, this.bookingStep + 1);
+  }
+
+  protected previousBookingStep(): void {
+    this.bookingStep = Math.max(1, this.bookingStep - 1);
+  }
+
+  protected submitBookingLead(form: HTMLFormElement): void {
+    if (this.bookingStep !== 3) {
+      return;
+    }
+
     const formData = new FormData(form);
 
     const payload = {
@@ -208,10 +236,26 @@ export class App {
       notes: String(formData.get('notes') ?? ''),
     };
 
-    await this.submitDirectlyToGoogleForm(payload);
+    this.submitDirectlyToGoogleForm(payload);
     form.reset();
-    this.closeBookingModal();
+    this.bookingStep = 4;
     this.launchConfetti();
+  }
+
+  private validateFormFields(form: HTMLFormElement, fieldNames: string[]): boolean {
+    for (const fieldName of fieldNames) {
+      const input = form.elements.namedItem(fieldName) as HTMLInputElement | HTMLTextAreaElement | null;
+      if (!input) {
+        continue;
+      }
+
+      if (!input.checkValidity()) {
+        input.reportValidity();
+        return false;
+      }
+    }
+
+    return true;
   }
 
   private buildGoogleFormPayload(payload: Record<string, string>): URLSearchParams {
@@ -219,21 +263,52 @@ export class App {
     for (const [key, value] of Object.entries(payload)) {
       const entryId = this.googleFormEntries[key as keyof typeof this.googleFormEntries];
       if (entryId && value) {
+        if (key === 'period') {
+          const [year, month, day] = value.split('-');
+          if (year && month && day) {
+            encoded.set(`${entryId}_year`, year);
+            encoded.set(`${entryId}_month`, month);
+            encoded.set(`${entryId}_day`, day);
+            continue;
+          }
+        }
+
         encoded.set(entryId, value);
       }
     }
     return encoded;
   }
 
-  private async submitDirectlyToGoogleForm(payload: Record<string, string>): Promise<void> {
-    await fetch(this.googleFormResponseUrl, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-      },
-      body: this.buildGoogleFormPayload(payload).toString(),
+  private submitDirectlyToGoogleForm(payload: Record<string, string>): void {
+    const frameId = 'google-form-submit-frame';
+    let iframe = document.getElementById(frameId) as HTMLIFrameElement | null;
+
+    if (!iframe) {
+      iframe = document.createElement('iframe');
+      iframe.id = frameId;
+      iframe.name = frameId;
+      iframe.style.display = 'none';
+      document.body.appendChild(iframe);
+    }
+
+    const hiddenForm = document.createElement('form');
+    hiddenForm.method = 'POST';
+    hiddenForm.action = this.googleFormResponseUrl;
+    hiddenForm.target = frameId;
+    hiddenForm.style.display = 'none';
+
+    const encodedPayload = this.buildGoogleFormPayload(payload);
+    encodedPayload.forEach((value, key) => {
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = key;
+      input.value = value;
+      hiddenForm.appendChild(input);
     });
+
+    document.body.appendChild(hiddenForm);
+    hiddenForm.submit();
+    document.body.removeChild(hiddenForm);
   }
 
   private launchConfetti(): void {

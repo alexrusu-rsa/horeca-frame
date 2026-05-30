@@ -520,14 +520,16 @@ h3 {
 
 .booking-modal {
   width: min(620px, 100%);
-  max-height: min(92dvh, 860px);
-  overflow: auto;
+  height: min(90dvh, 680px);
+  overflow: hidden;
   position: relative;
   border: 1px solid var(--line);
   border-radius: 20px;
   background: #fff8ef;
   box-shadow: 0 22px 48px rgba(15, 11, 7, 0.28);
   padding: 1rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .modal-close {
@@ -554,10 +556,94 @@ h3 {
     sans-serif;
 }
 
+.modal-step-status {
+  margin: 0.4rem 0 0;
+  color: var(--brand-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font:
+    700 0.7rem/1.2 'Manrope',
+    sans-serif;
+}
+
+.booking-stepper {
+  margin-top: 0.5rem;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.4rem;
+}
+
+.stepper-item {
+  min-width: 0;
+  display: grid;
+  justify-items: center;
+  gap: 0.28rem;
+}
+
+.stepper-dot {
+  width: 1.45rem;
+  height: 1.45rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  color: var(--ink-soft);
+  background: rgba(255, 255, 255, 0.78);
+  display: grid;
+  place-items: center;
+  font:
+    700 0.72rem/1 'Manrope',
+    sans-serif;
+}
+
+.stepper-label {
+  max-width: 100%;
+  text-align: center;
+  color: var(--ink-soft);
+  font:
+    700 0.62rem/1.2 'Manrope',
+    sans-serif;
+  letter-spacing: 0.02em;
+  text-wrap: balance;
+}
+
+.stepper-item.is-active .stepper-dot,
+.stepper-item.is-done .stepper-dot {
+  border-color: rgba(143, 61, 25, 0.36);
+  background: linear-gradient(140deg, #8f3d19, #c8682b);
+  color: #fff;
+}
+
+.stepper-item.is-active .stepper-label,
+.stepper-item.is-done .stepper-label {
+  color: var(--ink);
+}
+
 .booking-form {
-  margin-top: 0.9rem;
+  margin-top: 0.7rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.72rem;
+  flex: 1;
+  min-height: 0;
+}
+
+.booking-step {
   display: grid;
   gap: 0.72rem;
+  align-content: start;
+  flex: 1;
+  min-height: 0;
+}
+
+.booking-step[hidden] {
+  display: none !important;
+}
+
+.booking-step-heading {
+  margin: 0;
+  font:
+    700 1.05rem/1.2 'Manrope',
+    sans-serif;
+  color: var(--ink);
 }
 
 .booking-form label {
@@ -597,6 +683,29 @@ h3 {
 
 .modal-actions .btn {
   flex: 1 1 14rem;
+}
+
+.booking-success {
+  margin-top: 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: rgba(255, 248, 239, 0.72);
+  padding: 1rem;
+  display: grid;
+  align-content: center;
+  flex: 1;
+}
+
+.booking-success h3 {
+  margin: 0;
+}
+
+.booking-success p {
+  margin: 0.6rem 0 0;
+  color: var(--ink-soft);
+  font:
+    500 0.93rem/1.5 'Manrope',
+    sans-serif;
 }
 
 @keyframes rise-in {
@@ -683,6 +792,26 @@ h3 {
   .btn {
     width: 100%;
     text-align: center;
+  }
+
+  .booking-modal {
+    width: 100%;
+    height: min(94dvh, 700px);
+    padding: 0.85rem;
+  }
+
+  .booking-stepper {
+    gap: 0.25rem;
+  }
+
+  .stepper-dot {
+    width: 1.25rem;
+    height: 1.25rem;
+    font-size: 0.68rem;
+  }
+
+  .stepper-label {
+    font-size: 0.57rem;
   }
 
   .platform-logos {

@@ -78,6 +78,11 @@
   "BOOKING_MODAL": {
     "HEADING": "Start Your Booking",
     "INTRO": "Complete these details and submit directly. Your request is sent automatically.",
+    "STEP_STATUS": "Step {{current}} of {{total}}",
+    "STEP_CONTACT": "Contact",
+    "STEP_LOCATION_PERIOD": "Location and period",
+    "STEP_EXTRA": "Extra details",
+    "STEP_SUCCESS": "Done",
     "FIELD_PACKAGE": "Selected package",
     "FIELD_CONTACT": "Contact person",
     "FIELD_PROPERTY": "Property name",
@@ -89,8 +94,12 @@
     "FIELD_NOTES": "Extra details",
     "PLACEHOLDER_URL": "https://",
     "PLACEHOLDER_NOTES": "Any timing, access, or property details",
-    "CTA_CONTINUE": "Submit",
-    "CTA_CANCEL": "Close"
+    "CTA_BACK": "Back",
+    "CTA_NEXT": "Next",
+    "CTA_SUBMIT": "Submit",
+    "SUCCESS_TITLE": "Congratulations!",
+    "SUCCESS_TEXT": "Your request was sent successfully. We will get back to you shortly with next steps.",
+    "CTA_CLOSE": "Close"
   },
   "A11Y": {
     "PLATFORMS": "Listing platforms supported",

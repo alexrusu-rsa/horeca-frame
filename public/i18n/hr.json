@@ -78,6 +78,11 @@
   "BOOKING_MODAL": {
     "HEADING": "Pokreni rezervaciju",
     "INTRO": "Ispuni ove podatke i posalji direktno. Tvoj zahtjev se automatski salje.",
+    "STEP_STATUS": "Korak {{current}} od {{total}}",
+    "STEP_CONTACT": "Kontakt",
+    "STEP_LOCATION_PERIOD": "Lokacija i period",
+    "STEP_EXTRA": "Dodatni detalji",
+    "STEP_SUCCESS": "Zavrseno",
     "FIELD_PACKAGE": "Odabrani paket",
     "FIELD_CONTACT": "Kontakt osoba",
     "FIELD_PROPERTY": "Naziv objekta",
@@ -89,8 +94,12 @@
     "FIELD_NOTES": "Dodatne informacije",
     "PLACEHOLDER_URL": "https://",
     "PLACEHOLDER_NOTES": "Detalji o terminu, pristupu ili nekretnini",
-    "CTA_CONTINUE": "Submit",
-    "CTA_CANCEL": "Close"
+    "CTA_BACK": "Nazad",
+    "CTA_NEXT": "Dalje",
+    "CTA_SUBMIT": "Submit",
+    "SUCCESS_TITLE": "Cestitamo!",
+    "SUCCESS_TEXT": "Tvoj zahtjev je uspjesno poslan. Javljamo ti se uskoro s narednim koracima.",
+    "CTA_CLOSE": "Close"
   },
   "A11Y": {
     "PLATFORMS": "Podrzane platforme za oglasavanje",
