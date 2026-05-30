@@ -21,7 +21,16 @@ type PackageOffer = {
   imports: [TranslateModule],
 })
 export class App {
-  private readonly bookingFieldSelector = 'input:not([readonly]):not([disabled]), select:not([disabled]), textarea:not([disabled])';
+  // Delay to align scroll-to-field with mobile keyboard open animation.
+  private readonly keyboardScrollDelayMs = 180;
+  // Matches the existing responsive breakpoint used in app.scss.
+  private readonly mobileBreakpointPx = 980;
+  private readonly bookingFieldSelector = [
+    'input:not([readonly]):not([disabled])',
+    'select:not([disabled])',
+    'textarea:not([disabled])',
+  ].join(', ');
+  private mobileMediaQuery: MediaQueryList | null = null;
   protected readonly year = new Date().getFullYear();
   protected isBookingModalOpen = false;
   protected bookingStep = 1;
@@ -246,9 +255,13 @@ export class App {
     this.launchConfetti();
   }
 
-  protected handleFieldEnter(event: KeyboardEvent, form: HTMLFormElement): void {
+  protected handleFieldEnter(event: Event, form: HTMLFormElement): void {
+    if (!(event instanceof KeyboardEvent)) {
+      return;
+    }
+
     const target = event.target as HTMLElement | null;
-    if (!target || target.tagName === 'TEXTAREA') {
+    if (!target || target.matches('textarea')) {
       return;
     }
 
@@ -364,7 +377,7 @@ export class App {
   }
 
   private queueFocusCurrentStepField(): void {
-    setTimeout(() => {
+    requestAnimationFrame(() => {
       const form = document.querySelector<HTMLFormElement>('.booking-form');
       if (!form) {
         return;
@@ -378,7 +391,7 @@ export class App {
 
       firstField.focus();
       this.scrollFieldIntoView(firstField);
-    }, 0);
+    });
   }
 
   private getActiveBookingStep(form: HTMLFormElement): HTMLElement | null {
@@ -386,10 +399,18 @@ export class App {
   }
 
   private scrollFieldIntoView(field: HTMLElement): void {
-    if (window.matchMedia('(max-width: 980px)').matches) {
+    if (this.isMobileViewport()) {
       setTimeout(() => {
         field.scrollIntoView({ block: 'center', inline: 'nearest' });
-      }, 180);
+      }, this.keyboardScrollDelayMs);
     }
+  }
+
+  private isMobileViewport(): boolean {
+    if (!this.mobileMediaQuery) {
+      this.mobileMediaQuery = window.matchMedia(`(max-width: ${this.mobileBreakpointPx}px)`);
+    }
+
+    return this.mobileMediaQuery.matches;
   }
 }

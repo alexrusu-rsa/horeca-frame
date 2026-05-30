@@ -516,6 +516,7 @@ h3 {
   display: grid;
   place-items: center;
   padding: 1rem;
+  /* Keep modal scrollable and avoid background scroll chaining when mobile keyboard opens. */
   overflow-y: auto;
   overscroll-behavior: contain;
 }
