@@ -228,7 +228,7 @@ export class App {
     }
 
     if (this.bookingStep === 2) {
-      const isValid = this.validateFormFields(form, ['listingUrl', 'period']);
+      const isValid = this.validateFormFields(form, ['period']);
       if (!isValid) {
         return;
       }
