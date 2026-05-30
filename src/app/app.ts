@@ -260,12 +260,19 @@ export class App {
 
   private buildGoogleFormPayload(payload: Record<string, string>): URLSearchParams {
     const encoded = new URLSearchParams();
+
+    // Google Forms expects these control params for single-page public forms.
+    encoded.set('fvv', '1');
+    encoded.set('draftResponse', '[]');
+    encoded.set('pageHistory', '0');
+
     for (const [key, value] of Object.entries(payload)) {
       const entryId = this.googleFormEntries[key as keyof typeof this.googleFormEntries];
       if (entryId && value) {
         if (key === 'period') {
           const [year, month, day] = value.split('-');
           if (year && month && day) {
+            encoded.set(entryId, `${day}/${month}/${year}`);
             encoded.set(`${entryId}_year`, year);
             encoded.set(`${entryId}_month`, month);
             encoded.set(`${entryId}_day`, day);
@@ -280,35 +287,28 @@ export class App {
   }
 
   private submitDirectlyToGoogleForm(payload: Record<string, string>): void {
-    const frameId = 'google-form-submit-frame';
-    let iframe = document.getElementById(frameId) as HTMLIFrameElement | null;
+    const encodedPayload = this.buildGoogleFormPayload(payload);
+    const body = encodedPayload.toString();
 
-    if (!iframe) {
-      iframe = document.createElement('iframe');
-      iframe.id = frameId;
-      iframe.name = frameId;
-      iframe.style.display = 'none';
-      document.body.appendChild(iframe);
+    if (typeof navigator.sendBeacon === 'function') {
+      const blob = new Blob([body], {
+        type: 'application/x-www-form-urlencoded;charset=UTF-8',
+      });
+      navigator.sendBeacon(this.googleFormResponseUrl, blob);
+      return;
     }
 
-    const hiddenForm = document.createElement('form');
-    hiddenForm.method = 'POST';
-    hiddenForm.action = this.googleFormResponseUrl;
-    hiddenForm.target = frameId;
-    hiddenForm.style.display = 'none';
-
-    const encodedPayload = this.buildGoogleFormPayload(payload);
-    encodedPayload.forEach((value, key) => {
-      const input = document.createElement('input');
-      input.type = 'hidden';
-      input.name = key;
-      input.value = value;
-      hiddenForm.appendChild(input);
+    fetch(this.googleFormResponseUrl, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+      },
+      body,
+      keepalive: true,
+    }).catch(() => {
+      // Swallow network/cors errors: no-cors responses are opaque by design.
     });
-
-    document.body.appendChild(hiddenForm);
-    hiddenForm.submit();
-    document.body.removeChild(hiddenForm);
   }
 
   private launchConfetti(): void {
