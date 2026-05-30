@@ -353,17 +353,11 @@ export class App {
   }
 
   private submitWithHiddenIframe(encodedPayload: URLSearchParams): void {
-    const iframeName = 'google-form-submit-target';
-    const targetElement = document.getElementsByName(iframeName).item(0);
-    let iframe = targetElement instanceof HTMLIFrameElement ? targetElement : null;
-    if (!iframe) {
-      iframe = document.createElement('iframe');
-      iframe.name = iframeName;
-      iframe.hidden = true;
-      iframe.setAttribute('aria-hidden', 'true');
-      document.body.appendChild(iframe);
-    }
-
+    const iframeName = `google-form-submit-target-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+    const iframe = document.createElement('iframe');
+    iframe.name = iframeName;
+    iframe.hidden = true;
+    iframe.setAttribute('aria-hidden', 'true');
     const form = document.createElement('form');
     form.method = 'POST';
     form.action = this.googleFormResponseUrl;
@@ -378,9 +372,23 @@ export class App {
       form.appendChild(input);
     }
 
+    let cleanedUp = false;
+    const cleanup = (): void => {
+      if (cleanedUp) {
+        return;
+      }
+      cleanedUp = true;
+      window.clearTimeout(fallbackCleanupTimer);
+      form.remove();
+      iframe.remove();
+    };
+
+    iframe.addEventListener('load', cleanup, { once: true });
+    const fallbackCleanupTimer = window.setTimeout(cleanup, 15000);
+
+    document.body.appendChild(iframe);
     document.body.appendChild(form);
     form.submit();
-    window.setTimeout(() => form.remove(), 1000);
   }
 
   private launchConfetti(): void {
