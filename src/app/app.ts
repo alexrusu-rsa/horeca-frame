@@ -349,21 +349,46 @@ export class App {
 
   private submitDirectlyToGoogleForm(payload: Record<string, string>): void {
     const encodedPayload = this.buildGoogleFormPayload(payload);
-    const body = encodedPayload.toString();
+    this.submitWithHiddenIframe(encodedPayload);
+  }
 
-    // sendBeacon is unreliable for cross-origin Google Forms submissions and can
-    // silently drop requests. Use fetch with no-cors instead.
-    fetch(this.googleFormResponseUrl, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body,
-      keepalive: true,
-    }).catch(() => {
-      // Swallow network/cors errors: no-cors responses are opaque by design.
-    });
+  private submitWithHiddenIframe(encodedPayload: URLSearchParams): void {
+    const iframeName = `google-form-submit-target-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+    const iframe = document.createElement('iframe');
+    iframe.name = iframeName;
+    iframe.hidden = true;
+    iframe.setAttribute('aria-hidden', 'true');
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = this.googleFormResponseUrl;
+    form.target = iframeName;
+    form.style.display = 'none';
+
+    for (const [key, value] of encodedPayload.entries()) {
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = key;
+      input.value = value;
+      form.appendChild(input);
+    }
+
+    let cleanedUp = false;
+    const cleanup = (): void => {
+      if (cleanedUp) {
+        return;
+      }
+      cleanedUp = true;
+      window.clearTimeout(fallbackCleanupTimer);
+      form.remove();
+      iframe.remove();
+    };
+
+    iframe.addEventListener('load', cleanup, { once: true });
+    const fallbackCleanupTimer = window.setTimeout(cleanup, 15000);
+
+    document.body.appendChild(iframe);
+    document.body.appendChild(form);
+    form.submit();
   }
 
   private launchConfetti(): void {
