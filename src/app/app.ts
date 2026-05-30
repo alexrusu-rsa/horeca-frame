@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import confetti from 'canvas-confetti';
 
 type PackageOffer = {
   nameKey: string;
@@ -26,6 +27,8 @@ export class App {
 
   protected readonly googleFormBaseUrl =
     'https://docs.google.com/forms/d/e/1FAIpQLSfporG1A2aXr-6L-uCmlJ3u-Rd5Kj1VYgQg4vbdsrJEK3qA8w/viewform';
+  protected readonly googleFormResponseUrl =
+    'https://docs.google.com/forms/d/e/1FAIpQLSfporG1A2aXr-6L-uCmlJ3u-Rd5Kj1VYgQg4vbdsrJEK3qA8w/formResponse';
   protected readonly googleFormEntries = {
     contactPerson: 'entry.166040633',
     propertyName: 'entry.2011253831',
@@ -188,7 +191,7 @@ export class App {
     }
   }
 
-  protected submitBookingLead(event: SubmitEvent): void {
+  protected async submitBookingLead(event: SubmitEvent): Promise<void> {
     event.preventDefault();
     const form = event.target as HTMLFormElement;
     const formData = new FormData(form);
@@ -205,20 +208,41 @@ export class App {
       notes: String(formData.get('notes') ?? ''),
     };
 
-    const prefillUrl = this.buildGoogleFormPrefillUrl(payload);
-    window.open(prefillUrl, '_blank', 'noopener,noreferrer');
+    await this.submitDirectlyToGoogleForm(payload);
     form.reset();
     this.closeBookingModal();
+    this.launchConfetti();
   }
 
-  private buildGoogleFormPrefillUrl(payload: Record<string, string>): string {
-    const url = new URL(this.googleFormBaseUrl);
+  private buildGoogleFormPayload(payload: Record<string, string>): URLSearchParams {
+    const encoded = new URLSearchParams();
     for (const [key, value] of Object.entries(payload)) {
       const entryId = this.googleFormEntries[key as keyof typeof this.googleFormEntries];
       if (entryId && value) {
-        url.searchParams.set(entryId, value);
+        encoded.set(entryId, value);
       }
     }
-    return url.toString();
+    return encoded;
+  }
+
+  private async submitDirectlyToGoogleForm(payload: Record<string, string>): Promise<void> {
+    await fetch(this.googleFormResponseUrl, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+      },
+      body: this.buildGoogleFormPayload(payload).toString(),
+    });
+  }
+
+  private launchConfetti(): void {
+    confetti({
+      particleCount: 140,
+      spread: 80,
+      startVelocity: 45,
+      origin: { y: 0.65 },
+      colors: ['#2f6f57', '#d9a441', '#f3efe6', '#b44e3e'],
+    });
   }
 }

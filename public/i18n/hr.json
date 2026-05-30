@@ -77,7 +77,7 @@
   },
   "BOOKING_MODAL": {
     "HEADING": "Pokreni rezervaciju",
-    "INTRO": "Ispuni ove podatke, zatim nastavi u Google Form s unaprijed popunjenim poljima za brzu rezervaciju.",
+    "INTRO": "Ispuni ove podatke i posalji direktno. Tvoj zahtjev se automatski salje.",
     "FIELD_PACKAGE": "Odabrani paket",
     "FIELD_CONTACT": "Kontakt osoba",
     "FIELD_PROPERTY": "Naziv objekta",
@@ -89,8 +89,8 @@
     "FIELD_NOTES": "Dodatne informacije",
     "PLACEHOLDER_URL": "https://",
     "PLACEHOLDER_NOTES": "Detalji o terminu, pristupu ili nekretnini",
-    "CTA_CONTINUE": "Nastavi u Google Form",
-    "CTA_CANCEL": "Odustani"
+    "CTA_CONTINUE": "Submit",
+    "CTA_CANCEL": "Close"
   },
   "A11Y": {
     "PLATFORMS": "Podrzane platforme za oglasavanje",
