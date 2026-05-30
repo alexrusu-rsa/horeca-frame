@@ -96,10 +96,11 @@
     "PLACEHOLDER_NOTES": "Detalii despre timing, acces sau proprietate",
     "CTA_BACK": "Inapoi",
     "CTA_NEXT": "Continua",
-    "CTA_SUBMIT": "Submit",
+    "CTA_SUBMIT": "Trimite",
     "SUCCESS_TITLE": "Felicitari!",
     "SUCCESS_TEXT": "Cererea ta a fost trimisa cu succes. Revenim cat mai curand cu detaliile urmatoare.",
-    "CTA_CLOSE": "Close"
+    "CTA_CLOSE": "Inchide",
+    "SUBMISSION_ERROR": "Formularul nu a putut fi trimis. Te rugam sa incerci din nou."
   },
   "A11Y": {
     "PLATFORMS": "Platforme de listare suportate",
