@@ -153,7 +153,14 @@
             </div>
             <p class="deliverable">{{ pack.deliverableKey | translate }}</p>
             <p>{{ pack.noteKey | translate }}</p>
-            <button class="btn btn-solid package-book" type="button" (click)="openBookingModal(pack)">
+            <button
+              class="btn btn-solid package-book"
+              type="button"
+              (mouseenter)="prepareBookingModal()"
+              (focus)="prepareBookingModal()"
+              (touchstart)="prepareBookingModal()"
+              (click)="openBookingModal(pack)"
+            >
               {{ 'PACKAGES.CTA' | translate }}
             </button>
           </div>
@@ -179,121 +186,9 @@
     <p>{{ 'FOOTER.COPY' | translate:{ year: year } }}</p>
   </footer>
 
-  @if (isBookingModalOpen) {
-    <div class="booking-modal-overlay" (click)="onModalOverlayClick($event)">
-      <section class="booking-modal" role="dialog" aria-modal="true" aria-labelledby="booking-modal-heading">
-        <button type="button" class="modal-close" (click)="closeBookingModal()" [attr.aria-label]="'A11Y.CLOSE_BOOKING_MODAL' | translate">
-          ×
-        </button>
-        <h2 id="booking-modal-heading">{{ 'BOOKING_MODAL.HEADING' | translate }}</h2>
-        <p class="modal-step-status">{{ 'BOOKING_MODAL.STEP_STATUS' | translate:{ current: bookingStep, total: totalBookingSteps } }}</p>
-        <div class="booking-stepper" role="list" [attr.aria-label]="'BOOKING_MODAL.STEP_STATUS' | translate:{ current: bookingStep, total: totalBookingSteps }">
-          <div class="stepper-item" role="listitem" [class.is-active]="bookingStep === 1" [class.is-done]="bookingStep > 1">
-            <span class="stepper-dot">1</span>
-            <span class="stepper-label">{{ 'BOOKING_MODAL.STEP_CONTACT' | translate }}</span>
-          </div>
-          <div class="stepper-item" role="listitem" [class.is-active]="bookingStep === 2" [class.is-done]="bookingStep > 2">
-            <span class="stepper-dot">2</span>
-            <span class="stepper-label">{{ 'BOOKING_MODAL.STEP_LOCATION_PERIOD' | translate }}</span>
-          </div>
-          <div class="stepper-item" role="listitem" [class.is-active]="bookingStep === 3" [class.is-done]="bookingStep > 3">
-            <span class="stepper-dot">3</span>
-            <span class="stepper-label">{{ 'BOOKING_MODAL.STEP_EXTRA' | translate }}</span>
-          </div>
-          <div class="stepper-item" role="listitem" [class.is-active]="bookingStep === 4">
-            <span class="stepper-dot">4</span>
-            <span class="stepper-label">{{ 'BOOKING_MODAL.STEP_SUCCESS' | translate }}</span>
-          </div>
-        </div>
-
-        @if (bookingStep < 4) {
-          <p class="modal-intro">
-            {{ 'BOOKING_MODAL.INTRO' | translate }}
-          </p>
-
-          <form #bookingForm class="booking-form" novalidate (keydown.enter)="handleFieldEnter($event, bookingForm)" (focusin)="onBookingFieldFocus($event)">
-            <section class="booking-step" [hidden]="bookingStep !== 1" aria-labelledby="booking-step-contact">
-              <h3 id="booking-step-contact" class="booking-step-heading">{{ 'BOOKING_MODAL.STEP_CONTACT' | translate }}</h3>
-
-              <label>
-                {{ 'BOOKING_MODAL.FIELD_PACKAGE' | translate }}
-                <input type="text" [value]="(selectedPackage?.nameKey ?? '') | translate" readonly />
-              </label>
-
-              <label>
-                {{ 'BOOKING_MODAL.FIELD_CONTACT' | translate }}
-                <input type="text" name="contactPerson" required enterkeyhint="next" [placeholder]="bookingPlaceholders.contactPerson" />
-              </label>
-
-              <label>
-                {{ 'BOOKING_MODAL.FIELD_PROPERTY' | translate }}
-                <input type="text" name="propertyName" required enterkeyhint="next" [placeholder]="bookingPlaceholders.propertyName" />
-              </label>
-
-              <label>
-                {{ 'BOOKING_MODAL.FIELD_EMAIL' | translate }}
-                <input type="email" name="email" required enterkeyhint="next" [placeholder]="bookingPlaceholders.email" />
-              </label>
-
-              <label>
-                {{ 'BOOKING_MODAL.FIELD_PHONE' | translate }}
-                <input type="tel" name="phone" required enterkeyhint="next" [placeholder]="bookingPlaceholders.phone" />
-              </label>
-            </section>
-
-            <section class="booking-step" [hidden]="bookingStep !== 2" aria-labelledby="booking-step-location">
-              <h3 id="booking-step-location" class="booking-step-heading">{{ 'BOOKING_MODAL.STEP_LOCATION_PERIOD' | translate }}</h3>
-
-              <label>
-                {{ 'BOOKING_MODAL.FIELD_URL' | translate }}
-                <input type="text" name="listingUrl" [placeholder]="bookingPlaceholders.listingUrl" enterkeyhint="next" />
-              </label>
-
-              <label>
-                {{ 'BOOKING_MODAL.FIELD_LOCATION' | translate }}
-                <input type="text" name="location" enterkeyhint="next" [placeholder]="bookingPlaceholders.location" />
-              </label>
-
-              <label>
-                {{ 'BOOKING_MODAL.FIELD_PERIOD' | translate }}
-                <input type="date" name="period" required enterkeyhint="next" [placeholder]="bookingPlaceholders.period" />
-              </label>
-            </section>
-
-            <section class="booking-step" [hidden]="bookingStep !== 3" aria-labelledby="booking-step-notes">
-              <h3 id="booking-step-notes" class="booking-step-heading">{{ 'BOOKING_MODAL.STEP_EXTRA' | translate }}</h3>
-
-              <label>
-                {{ 'BOOKING_MODAL.FIELD_NOTES' | translate }}
-                <textarea name="notes" rows="4" [placeholder]="bookingPlaceholders.notes" enterkeyhint="done"></textarea>
-              </label>
-            </section>
-
-            <div class="modal-actions">
-              @if (bookingStep > 1) {
-                <button class="btn btn-outline" type="button" (click)="previousBookingStep()" [disabled]="isSubmitting()">{{ 'BOOKING_MODAL.CTA_BACK' | translate }}</button>
-              }
-
-              @if (bookingStep < 3) {
-                <button class="btn btn-solid" type="button" (click)="nextBookingStep(bookingForm)" [disabled]="isSubmitting()">{{ 'BOOKING_MODAL.CTA_NEXT' | translate }}</button>
-              } @else {
-                <button class="btn btn-solid" type="button" (click)="submitBookingLead(bookingForm)" [disabled]="isSubmitting()">{{ 'BOOKING_MODAL.CTA_SUBMIT' | translate }}</button>
-              }
-            </div>
-            @if (submissionError()) {
-              <p class="booking-submit-error">{{ submissionError() }}</p>
-            }
-          </form>
-        } @else {
-          <section class="booking-success" aria-live="polite">
-            <h3>{{ 'BOOKING_MODAL.SUCCESS_TITLE' | translate }}</h3>
-            <p>{{ 'BOOKING_MODAL.SUCCESS_TEXT' | translate }}</p>
-            <div class="modal-actions">
-              <button class="btn btn-solid" type="button" (click)="closeBookingModal()">{{ 'BOOKING_MODAL.CTA_CLOSE' | translate }}</button>
-            </div>
-          </section>
-        }
-      </section>
-    </div>
+  @defer (when bookingModalPrefetchRequested()) {
+    @if (isBookingModalOpen() && selectedPackage(); as chosenPackage) {
+      <app-booking-modal [selectedPackage]="chosenPackage" (closeModal)="closeBookingModal()" />
+    }
   }
 </div>
