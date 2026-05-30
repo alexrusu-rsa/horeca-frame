@@ -349,21 +349,37 @@ export class App {
 
   private submitDirectlyToGoogleForm(payload: Record<string, string>): void {
     const encodedPayload = this.buildGoogleFormPayload(payload);
-    const body = encodedPayload.toString();
+    this.submitWithHiddenIframe(encodedPayload);
+  }
 
-    // sendBeacon is unreliable for cross-origin Google Forms submissions and can
-    // silently drop requests. Use fetch with no-cors instead.
-    fetch(this.googleFormResponseUrl, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body,
-      keepalive: true,
-    }).catch(() => {
-      // Swallow network/cors errors: no-cors responses are opaque by design.
-    });
+  private submitWithHiddenIframe(encodedPayload: URLSearchParams): void {
+    const iframeName = 'google-form-submit-target';
+    let iframe = document.querySelector<HTMLIFrameElement>(`iframe[name="${iframeName}"]`);
+    if (!iframe) {
+      iframe = document.createElement('iframe');
+      iframe.name = iframeName;
+      iframe.hidden = true;
+      iframe.setAttribute('aria-hidden', 'true');
+      document.body.appendChild(iframe);
+    }
+
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = this.googleFormResponseUrl;
+    form.target = iframeName;
+    form.style.display = 'none';
+
+    for (const [key, value] of encodedPayload.entries()) {
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = key;
+      input.value = value;
+      form.appendChild(input);
+    }
+
+    document.body.appendChild(form);
+    form.submit();
+    form.remove();
   }
 
   private launchConfetti(): void {
