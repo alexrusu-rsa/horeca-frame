@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import confetti from 'canvas-confetti';
+import { submitToGoogleForm } from './google-form';
 
 type PackageOffer = {
   nameKey: string;
@@ -36,22 +37,8 @@ export class App {
   protected bookingStep = 1;
   protected readonly totalBookingSteps = 4;
   protected selectedPackage: PackageOffer | null = null;
-
-  protected readonly googleFormBaseUrl =
-    'https://docs.google.com/forms/d/e/1FAIpQLSfporG1A2aXr-6L-uCmlJ3u-Rd5Kj1VYgQg4vbdsrJEK3qA8w/viewform';
-  protected readonly googleFormResponseUrl =
-    'https://docs.google.com/forms/d/e/1FAIpQLSfporG1A2aXr-6L-uCmlJ3u-Rd5Kj1VYgQg4vbdsrJEK3qA8w/formResponse';
-  protected readonly googleFormEntries = {
-    contactPerson: 'entry.166040633',
-    propertyName: 'entry.2011253831',
-    email: 'entry.1553480704',
-    phone: 'entry.1540406263',
-    listingUrl: 'entry.1563827681',
-    location: 'entry.1482001310',
-    notes: 'entry.990638640',
-    period: 'entry.1162848674',
-    packageChoice: 'entry.1088604366',
-  };
+  protected readonly isSubmitting = signal(false);
+  protected readonly submissionError = signal<string | null>(null);
 
   protected readonly heroImage = {
     src: 'photos/Pensiunea Sophia-34.jpg',
@@ -191,6 +178,7 @@ export class App {
     this.selectedPackage = pack;
     this.isBookingModalOpen = true;
     this.bookingStep = 1;
+    this.submissionError.set(null);
     this.queueFocusCurrentStepField();
   }
 
@@ -198,6 +186,8 @@ export class App {
     this.isBookingModalOpen = false;
     this.bookingStep = 1;
     this.selectedPackage = null;
+    this.submissionError.set(null);
+    this.isSubmitting.set(false);
   }
 
   protected onModalOverlayClick(event: MouseEvent): void {
@@ -230,13 +220,12 @@ export class App {
     this.queueFocusCurrentStepField();
   }
 
-  protected submitBookingLead(form: HTMLFormElement): void {
-    if (this.bookingStep !== 3) {
+  protected async submitBookingLead(form: HTMLFormElement): Promise<void> {
+    if (this.bookingStep !== 3 || this.isSubmitting()) {
       return;
     }
 
     const formData = new FormData(form);
-
     const payload = {
       contactPerson: String(formData.get('contactPerson') ?? ''),
       propertyName: String(formData.get('propertyName') ?? ''),
@@ -249,10 +238,19 @@ export class App {
       notes: String(formData.get('notes') ?? ''),
     };
 
-    this.submitDirectlyToGoogleForm(payload);
-    form.reset();
-    this.bookingStep = 4;
-    this.launchConfetti();
+    this.submissionError.set(null);
+    this.isSubmitting.set(true);
+
+    try {
+      await submitToGoogleForm(payload);
+      form.reset();
+      this.bookingStep = 4;
+      this.launchConfetti();
+    } catch {
+      this.submissionError.set('Could not submit the form. Please try again.');
+    } finally {
+      this.isSubmitting.set(false);
+    }
   }
 
   protected handleFieldEnter(event: Event, form: HTMLFormElement): void {
@@ -290,7 +288,7 @@ export class App {
       return;
     }
 
-    this.submitBookingLead(form);
+    void this.submitBookingLead(form);
   }
 
   protected onBookingFieldFocus(event: FocusEvent): void {
@@ -316,79 +314,6 @@ export class App {
     }
 
     return true;
-  }
-
-  private buildGoogleFormPayload(payload: Record<string, string>): URLSearchParams {
-    const encoded = new URLSearchParams();
-
-    // Google Forms expects these control params for single-page public forms.
-    encoded.set('fvv', '1');
-    encoded.set('draftResponse', '[]');
-    encoded.set('pageHistory', '0');
-
-    for (const [key, value] of Object.entries(payload)) {
-      const entryId = this.googleFormEntries[key as keyof typeof this.googleFormEntries];
-      if (entryId && value) {
-        if (key === 'period') {
-          const [year, month, day] = value.split('-');
-          if (year && month && day) {
-            // Google Forms date fields require separate _year/_month/_day params.
-            // Month and day must be numeric strings without leading zeros.
-            encoded.set(`${entryId}_year`, String(parseInt(year, 10)));
-            encoded.set(`${entryId}_month`, String(parseInt(month, 10)));
-            encoded.set(`${entryId}_day`, String(parseInt(day, 10)));
-            continue;
-          }
-        }
-
-        encoded.set(entryId, value);
-      }
-    }
-    return encoded;
-  }
-
-  private submitDirectlyToGoogleForm(payload: Record<string, string>): void {
-    const encodedPayload = this.buildGoogleFormPayload(payload);
-    this.submitWithHiddenIframe(encodedPayload);
-  }
-
-  private submitWithHiddenIframe(encodedPayload: URLSearchParams): void {
-    const iframeName = `google-form-submit-target-${Date.now()}-${Math.random().toString(36).slice(2)}`;
-    const iframe = document.createElement('iframe');
-    iframe.name = iframeName;
-    iframe.hidden = true;
-    iframe.setAttribute('aria-hidden', 'true');
-    const form = document.createElement('form');
-    form.method = 'POST';
-    form.action = this.googleFormResponseUrl;
-    form.target = iframeName;
-    form.style.display = 'none';
-
-    for (const [key, value] of encodedPayload.entries()) {
-      const input = document.createElement('input');
-      input.type = 'hidden';
-      input.name = key;
-      input.value = value;
-      form.appendChild(input);
-    }
-
-    let cleanedUp = false;
-    const cleanup = (): void => {
-      if (cleanedUp) {
-        return;
-      }
-      cleanedUp = true;
-      window.clearTimeout(fallbackCleanupTimer);
-      form.remove();
-      iframe.remove();
-    };
-
-    iframe.addEventListener('load', cleanup, { once: true });
-    const fallbackCleanupTimer = window.setTimeout(cleanup, 15000);
-
-    document.body.appendChild(iframe);
-    document.body.appendChild(form);
-    form.submit();
   }
 
   private launchConfetti(): void {

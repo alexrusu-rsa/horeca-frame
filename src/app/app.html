@@ -271,15 +271,18 @@
 
             <div class="modal-actions">
               @if (bookingStep > 1) {
-                <button class="btn btn-outline" type="button" (click)="previousBookingStep()">{{ 'BOOKING_MODAL.CTA_BACK' | translate }}</button>
+                <button class="btn btn-outline" type="button" (click)="previousBookingStep()" [disabled]="isSubmitting()">{{ 'BOOKING_MODAL.CTA_BACK' | translate }}</button>
               }
 
               @if (bookingStep < 3) {
-                <button class="btn btn-solid" type="button" (click)="nextBookingStep(bookingForm)">{{ 'BOOKING_MODAL.CTA_NEXT' | translate }}</button>
+                <button class="btn btn-solid" type="button" (click)="nextBookingStep(bookingForm)" [disabled]="isSubmitting()">{{ 'BOOKING_MODAL.CTA_NEXT' | translate }}</button>
               } @else {
-                <button class="btn btn-solid" type="button" (click)="submitBookingLead(bookingForm)">{{ 'BOOKING_MODAL.CTA_SUBMIT' | translate }}</button>
+                <button class="btn btn-solid" type="button" (click)="submitBookingLead(bookingForm)" [disabled]="isSubmitting()">{{ 'BOOKING_MODAL.CTA_SUBMIT' | translate }}</button>
               }
             </div>
+            @if (submissionError()) {
+              <p class="booking-submit-error">{{ submissionError() }}</p>
+            }
           </form>
         } @else {
           <section class="booking-success" aria-live="polite">
