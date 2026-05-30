@@ -17,7 +17,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     importProvidersFrom(
       TranslateModule.forRoot({
-        defaultLanguage: 'ro',
+        fallbackLang: 'ro',
       }),
     ),
     ...provideTranslateHttpLoader({

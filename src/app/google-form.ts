@@ -54,7 +54,10 @@ function validateBookingPayload(data: BookingPayload): void {
 }
 
 export async function submitToGoogleForm(data: BookingPayload): Promise<void> {
-  if (GOOGLE_FORM_CONFIG.submissionMode !== 'single-row-per-group' || !GOOGLE_FORM_CONFIG.groupFields) {
+  if (
+    GOOGLE_FORM_CONFIG.submissionMode !== 'single-row-per-group' ||
+    !GOOGLE_FORM_CONFIG.groupFields
+  ) {
     throw new Error('Unsupported Google Form submission mode.');
   }
 
@@ -74,7 +77,6 @@ export async function submitToGoogleForm(data: BookingPayload): Promise<void> {
     if (key === 'period') {
       const parsed = toMonthDayYear(value.trim());
       if (parsed) {
-        payload.set(entryId, `${parsed.month}/${parsed.day}/${parsed.year}`);
         payload.set(`${entryId}_year`, String(parseInt(parsed.year, 10)));
         payload.set(`${entryId}_month`, String(parseInt(parsed.month, 10)));
         payload.set(`${entryId}_day`, String(parseInt(parsed.day, 10)));
