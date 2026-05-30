@@ -21,6 +21,7 @@ type PackageOffer = {
   imports: [TranslateModule],
 })
 export class App {
+  private readonly bookingFieldSelector = 'input:not([readonly]):not([disabled]), select:not([disabled]), textarea:not([disabled])';
   protected readonly year = new Date().getFullYear();
   protected isBookingModalOpen = false;
   protected bookingStep = 1;
@@ -181,6 +182,7 @@ export class App {
     this.selectedPackage = pack;
     this.isBookingModalOpen = true;
     this.bookingStep = 1;
+    this.queueFocusCurrentStepField();
   }
 
   protected closeBookingModal(): void {
@@ -211,10 +213,12 @@ export class App {
     }
 
     this.bookingStep = Math.min(3, this.bookingStep + 1);
+    this.queueFocusCurrentStepField();
   }
 
   protected previousBookingStep(): void {
     this.bookingStep = Math.max(1, this.bookingStep - 1);
+    this.queueFocusCurrentStepField();
   }
 
   protected submitBookingLead(form: HTMLFormElement): void {
@@ -240,6 +244,49 @@ export class App {
     form.reset();
     this.bookingStep = 4;
     this.launchConfetti();
+  }
+
+  protected handleFieldEnter(event: KeyboardEvent, form: HTMLFormElement): void {
+    const target = event.target as HTMLElement | null;
+    if (!target || target.tagName === 'TEXTAREA') {
+      return;
+    }
+
+    const activeStep = this.getActiveBookingStep(form);
+    if (!activeStep) {
+      return;
+    }
+
+    const fields = Array.from(activeStep.querySelectorAll<HTMLElement>(this.bookingFieldSelector));
+    const currentIndex = fields.indexOf(target);
+    if (currentIndex === -1) {
+      return;
+    }
+
+    event.preventDefault();
+
+    const nextField = fields[currentIndex + 1];
+    if (nextField) {
+      nextField.focus();
+      this.scrollFieldIntoView(nextField);
+      return;
+    }
+
+    if (this.bookingStep < 3) {
+      this.nextBookingStep(form);
+      return;
+    }
+
+    this.submitBookingLead(form);
+  }
+
+  protected onBookingFieldFocus(event: FocusEvent): void {
+    const field = event.target as HTMLElement | null;
+    if (!field || !field.matches(this.bookingFieldSelector)) {
+      return;
+    }
+
+    this.scrollFieldIntoView(field);
   }
 
   private validateFormFields(form: HTMLFormElement, fieldNames: string[]): boolean {
@@ -314,5 +361,35 @@ export class App {
       origin: { y: 0.65 },
       colors: ['#2f6f57', '#d9a441', '#f3efe6', '#b44e3e'],
     });
+  }
+
+  private queueFocusCurrentStepField(): void {
+    setTimeout(() => {
+      const form = document.querySelector<HTMLFormElement>('.booking-form');
+      if (!form) {
+        return;
+      }
+
+      const activeStep = this.getActiveBookingStep(form);
+      const firstField = activeStep?.querySelector<HTMLElement>(this.bookingFieldSelector);
+      if (!firstField) {
+        return;
+      }
+
+      firstField.focus();
+      this.scrollFieldIntoView(firstField);
+    }, 0);
+  }
+
+  private getActiveBookingStep(form: HTMLFormElement): HTMLElement | null {
+    return form.querySelector<HTMLElement>('.booking-step:not([hidden])');
+  }
+
+  private scrollFieldIntoView(field: HTMLElement): void {
+    if (window.matchMedia('(max-width: 980px)').matches) {
+      setTimeout(() => {
+        field.scrollIntoView({ block: 'center', inline: 'nearest' });
+      }, 180);
+    }
   }
 }
