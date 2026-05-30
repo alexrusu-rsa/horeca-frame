@@ -96,10 +96,11 @@
     "PLACEHOLDER_NOTES": "Detalji o terminu, pristupu ili nekretnini",
     "CTA_BACK": "Nazad",
     "CTA_NEXT": "Dalje",
-    "CTA_SUBMIT": "Submit",
+    "CTA_SUBMIT": "Posalji",
     "SUCCESS_TITLE": "Cestitamo!",
     "SUCCESS_TEXT": "Tvoj zahtjev je uspjesno poslan. Javljamo ti se uskoro s narednim koracima.",
-    "CTA_CLOSE": "Close"
+    "CTA_CLOSE": "Zatvori",
+    "SUBMISSION_ERROR": "Obrazac nije moguce poslati. Pokusaj ponovno."
   },
   "A11Y": {
     "PLATFORMS": "Podrzane platforme za oglasavanje",

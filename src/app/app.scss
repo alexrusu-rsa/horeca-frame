@@ -229,6 +229,12 @@ h1 {
   transform: translateY(-2px);
 }
 
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+  transform: none;
+}
+
 .btn:focus-visible {
   outline: 2px solid rgba(200, 104, 43, 0.42);
   outline-offset: 3px;
@@ -686,6 +692,14 @@ h3 {
 
 .modal-actions .btn {
   flex: 1 1 14rem;
+}
+
+.booking-submit-error {
+  margin: 0;
+  color: #9f2f2f;
+  font:
+    600 0.88rem/1.4 'Manrope',
+    sans-serif;
 }
 
 .booking-success {
