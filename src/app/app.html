@@ -60,8 +60,8 @@
               width="2048"
               height="1365"
               sizes="(max-width: 980px) 92vw, 46vw"
-              [loading]="i === 0 ? 'eager' : 'lazy'"
-              [attr.fetchpriority]="i === 0 ? 'high' : null"
+              loading="eager"
+              [attr.fetchpriority]="i === 0 ? 'high' : 'auto'"
             />
           </div>
         }
@@ -122,6 +122,8 @@
             height="1365"
             sizes="(max-width: 640px) 96vw, (max-width: 1024px) 48vw, 31vw"
             loading="lazy"
+            fetchpriority="low"
+            decoding="async"
           />
         </figure>
       }
@@ -138,7 +140,15 @@
       @for (pack of packages; track pack.name) {
         <article class="package-card">
           <figure class="package-media">
-            <img [src]="pack.image.src" [alt]="pack.image.alt" width="2048" height="1365" loading="lazy" />
+            <img
+              [src]="pack.image.src"
+              [alt]="pack.image.alt"
+              width="2048"
+              height="1365"
+              loading="lazy"
+              fetchpriority="low"
+              decoding="async"
+            />
           </figure>
           <div class="package-content">
             <div class="package-top">
