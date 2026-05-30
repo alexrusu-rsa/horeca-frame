@@ -1,0 +1,120 @@
+{
+  "BRAND": "Horeca Frame",
+  "NAV": {
+    "BOOK_SESSION": "Programeaza o sesiune"
+  },
+  "HERO": {
+    "EYEBROW": "Servicii foto pentru Airbnb si Booking",
+    "TITLE": "Obtine mai multi clienti pe Airbnb si Booking cu fotografii care convertesc",
+    "INTRO": "Ajut proprietarii de unitati de cazare sa creasca clickurile, increderea si rezervarile cu fotografie orientata pe conversie, special gandita pentru listari Airbnb si Booking.",
+    "PLATFORM_PROOF": "Optimizat pentru canale de booking de top",
+    "CTA_PORTFOLIO": "Vezi portofoliu",
+    "CTA_PACKAGES": "Vezi pachete"
+  },
+  "SERVICE_POINTS": {
+    "ITEM_1": "Directie foto optimizata pentru Airbnb si Booking, care imbunatateste performanta listingului",
+    "ITEM_2": "Compozitie si styling gandite sa atraga mai multi clienti si sa creasca rata de conversie",
+    "ITEM_3": "Livrare rapida cu exporturi pregatite pentru web si thumbnail-uri"
+  },
+  "STATS": {
+    "PREVIEW_DELIVERY": "Prima previzualizare in 24h",
+    "ENGAGEMENT_LIFT": "Crestere tipica a engagementului listingului",
+    "WEB_READY": "Fisiere optimizate pentru web"
+  },
+  "WORKFLOW": {
+    "HEADING": "Cum lucram",
+    "STEP_LABEL": "Pas",
+    "STEP_1_TITLE": "Brief si obiective proprietate",
+    "STEP_1_TEXT": "Aliniem audienta, mixul de camere si punctele tale forte.",
+    "STEP_2_TITLE": "Sesiune foto la locatie",
+    "STEP_2_TEXT": "Acoperire structurata, camera cu camera, cu unghiuri care vand experienta.",
+    "STEP_3_TITLE": "Editare si livrare",
+    "STEP_3_TEXT": "Retusuri consistente si fisiere optimizate, gata de publicare."
+  },
+  "OWNER_ADVANTAGE": {
+    "EYEBROW": "Avantaj pentru proprietar",
+    "HEADING": "De ce avem nevoie de 3 zile la locatie si de ce ai doar de castigat",
+    "INTRO": "Pentru a fotografia complet unitatea de cazare la nivel profesionist, avem nevoie de acces la o camera timp de 3 zile. Astfel capturam toate unghiurile, toate conditiile de lumina si toate detaliile care iti fac listingul complet si premium.",
+    "BULLET_1": "Acoperire vizuala completa pentru toate camerele si spatiile pentru oaspeti.",
+    "BULLET_2": "Calitate mai buna a listingului, care creste increderea si clickurile.",
+    "BULLET_3": "Potential mai mare de rezervare si pozitionare mai buna pe pret.",
+    "BULLET_4": "Biblioteca foto pe termen lung, reutilizabila pe toate canalele.",
+    "CLOSE": "Pe scurt: fereastra de 3 zile ne ajuta sa cream fotografii care lucreaza pentru business-ul tau mult timp dupa sedinta."
+  },
+  "PORTFOLIO": {
+    "HEADING": "Fotografii recente de cazare",
+    "SUB": "Cadre reale din setul proprietatii tale, prezentate ca storytelling vizual gata de listing."
+  },
+  "PACKAGES": {
+    "HEADING": "Pachete pentru orice dimensiune de proprietate",
+    "SUB": "Optiuni simple si transparente, aliniate cu obiectivele tale de rezervare.",
+    "CTA": "Rezerva pachetul",
+    "STARTER": {
+      "NAME": "Starter",
+      "DELIVERABLE": "15 fotografii finale",
+      "NOTE": "Ideal pentru studiouri si pensiuni mici",
+      "IMAGE_ALT": "Preview pachet Starter cu camera confortabila."
+    },
+    "GROWTH": {
+      "NAME": "Growth",
+      "DELIVERABLE": "30 fotografii finale",
+      "NOTE": "Potrivit pentru unitati medii si grupuri de apartamente",
+      "IMAGE_ALT": "Preview pachet Growth cu unghi exterior complet."
+    },
+    "SIGNATURE": {
+      "NAME": "Signature",
+      "DELIVERABLE": "50 fotografii finale",
+      "NOTE": "Acoperire vizuala completa pentru proprietati premium",
+      "IMAGE_ALT": "Preview pachet Signature cu atmosfera premium de seara."
+    }
+  },
+  "CONTACT": {
+    "HEADING": "Pregatit sa iti upgradezi vizual listingul?",
+    "INTRO": "Trimite locatia, tipul proprietatii si perioada dorita. Revin cu o propunere foto personalizata pentru unitatea ta de cazare."
+  },
+  "FOOTER": {
+    "COPY": "© {{year}} Horeca Frame. Fotografie de cazare construita pentru conversie."
+  },
+  "BOOKING_MODAL": {
+    "HEADING": "Incepe rezervarea",
+    "INTRO": "Completeaza aceste detalii, apoi continua in Google Form cu campuri precompletate pentru o rezervare mai rapida.",
+    "FIELD_PACKAGE": "Pachet ales",
+    "FIELD_CONTACT": "Persoana contact",
+    "FIELD_PROPERTY": "Nume pensiune",
+    "FIELD_EMAIL": "Email",
+    "FIELD_PHONE": "Telefon",
+    "FIELD_URL": "Link/URL",
+    "FIELD_LOCATION": "Locatie",
+    "FIELD_PERIOD": "Perioada",
+    "FIELD_NOTES": "Alte informatii",
+    "PLACEHOLDER_URL": "https://",
+    "PLACEHOLDER_NOTES": "Detalii despre timing, acces sau proprietate",
+    "CTA_CONTINUE": "Continua in Google Form",
+    "CTA_CANCEL": "Anuleaza"
+  },
+  "A11Y": {
+    "PLATFORMS": "Platforme de listare suportate",
+    "LOGO_AIRBNB": "Logo Airbnb",
+    "LOGO_BOOKING": "Logo Booking.com",
+    "LOGO_AGODA": "Logo Agoda",
+    "STATS": "Indicatori de performanta",
+    "HERO_GALLERY": "Galerie foto reprezentativa pentru unitatea de cazare",
+    "CLOSE_BOOKING_MODAL": "Inchide formularul de rezervare"
+  },
+  "IMAGES": {
+    "HERO_MAIN_ALT": "Vedere exterioara a unitatii de cazare in lumina calda.",
+    "HERO_SECONDARY_ALT": "Vedere exterioara Pensiunea Sophia cu flori.",
+    "GALLERY_1_ALT": "Camera luminoasa optimizata pentru conversie in Airbnb si Booking.",
+    "GALLERY_2_ALT": "Cadru curat de dormitor care imbunatateste claritatea listingului.",
+    "GALLERY_3_ALT": "Unghi interior primitor pentru cresterea increderii la rezervare.",
+    "GALLERY_4_ALT": "Compozitie echilibrata care evidentiaza confortul si spatiul.",
+    "GALLERY_5_ALT": "Cadru cu lumina naturala pregatit pentru listari performante.",
+    "GALLERY_6_ALT": "Imagine de baie care sustine increderea oaspetilor.",
+    "GALLERY_7_ALT": "Detalii interioare premium pentru prezentare de nivel inalt.",
+    "GALLERY_8_ALT": "Styling pregatit pentru oaspeti pe platforme de booking.",
+    "GALLERY_9_ALT": "Cadru lifestyle care comunica confort si calitate.",
+    "GALLERY_10_ALT": "Perspectiva de camera gandita sa atraga mai multi clienti.",
+    "GALLERY_11_ALT": "Cadru arhitectural care creste valoarea perceputa a proprietatii.",
+    "GALLERY_12_ALT": "Cadru final premium potrivit pentru cover Airbnb si Booking."
+  }
+}

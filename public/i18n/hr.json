@@ -1,0 +1,120 @@
+{
+  "BRAND": "Horeca Frame",
+  "NAV": {
+    "BOOK_SESSION": "Rezerviraj sesiju"
+  },
+  "HERO": {
+    "EYEBROW": "Fotografske usluge za Airbnb i Booking",
+    "TITLE": "Privuci vise gostiju na Airbnb-u i Bookingu uz fotografije koje konvertiraju",
+    "INTRO": "Pomazem vlasnicima smjestaja povecati klikove, povjerenje i broj rezervacija kroz fotografiju usmjerenu na konverzije, posebno prilagodenu Airbnb i Booking oglasima.",
+    "PLATFORM_PROOF": "Optimizirano za vodece booking kanale",
+    "CTA_PORTFOLIO": "Pogledaj portfolio",
+    "CTA_PACKAGES": "Pogledaj pakete"
+  },
+  "SERVICE_POINTS": {
+    "ITEM_1": "Foto smjernice optimizirane za Airbnb i Booking koje poboljsavaju izvedbu oglasa",
+    "ITEM_2": "Kompozicija i styling osmisljeni za privlacenje vise gostiju i vecu konverziju",
+    "ITEM_3": "Brza isporuka s web-optimiziranim datotekama i izrezima prilagodenim thumbnailu"
+  },
+  "STATS": {
+    "PREVIEW_DELIVERY": "Prvi pregled unutar 24h",
+    "ENGAGEMENT_LIFT": "Tipicno povecanje angazmana oglasa",
+    "WEB_READY": "Datoteke optimizirane za web"
+  },
+  "WORKFLOW": {
+    "HEADING": "Kako radimo",
+    "STEP_LABEL": "Korak",
+    "STEP_1_TITLE": "Brief i ciljevi objekta",
+    "STEP_1_TEXT": "Uskladujemo publiku, strukturu soba i tvoje glavne prednosti.",
+    "STEP_2_TITLE": "Foto sesija na lokaciji",
+    "STEP_2_TEXT": "Strukturirano snimanje sobu po sobu, s kadrovima koji prodaju iskustvo.",
+    "STEP_3_TITLE": "Obrada i isporuka",
+    "STEP_3_TEXT": "Konzistentna retusiranja i optimizirane datoteke spremne za objavu."
+  },
+  "OWNER_ADVANTAGE": {
+    "EYEBROW": "Prednost za vlasnika",
+    "HEADING": "Zasto nam trebaju 3 dana na lokaciji i zasto ti od toga samo dobivas",
+    "INTRO": "Da bismo profesionalno fotografirali cijeli smjestaj, potreban nam je pristup jednoj sobi tijekom 3 dana. Tako hvatamo sve kutove, sve uvjete osvjetljenja i sve detalje koji tvoj oglas cine potpunim i premium.",
+    "BULLET_1": "Potpuna vizualna pokrivenost svih soba i prostora za goste.",
+    "BULLET_2": "Jaca kvaliteta oglasa koja gradi povjerenje i povecava broj klikova.",
+    "BULLET_3": "Veci potencijal rezervacija i bolja sigurnost pri formiranju cijene.",
+    "BULLET_4": "Dugorocna foto biblioteka koju mozes koristiti na svim kanalima.",
+    "CLOSE": "Ukratko: prozor od 3 dana pomaze nam stvoriti fotografije koje rade za tvoj biznis dugo nakon snimanja."
+  },
+  "PORTFOLIO": {
+    "HEADING": "Nedavne fotografije smjestaja",
+    "SUB": "Stvarni kadrovi iz seta tvoje nekretnine, prikazani kao vizualni storytelling spreman za oglas."
+  },
+  "PACKAGES": {
+    "HEADING": "Paketi za svaku velicinu nekretnine",
+    "SUB": "Jednostavne i transparentne opcije uskladene s tvojim ciljevima rezervacija.",
+    "CTA": "Rezerviraj paket",
+    "STARTER": {
+      "NAME": "Starter",
+      "DELIVERABLE": "15 finalnih fotografija",
+      "NOTE": "Idealno za studije i male pansione",
+      "IMAGE_ALT": "Pregled Starter paketa s udobnom sobom."
+    },
+    "GROWTH": {
+      "NAME": "Growth",
+      "DELIVERABLE": "30 finalnih fotografija",
+      "NOTE": "Prikladno za srednje objekte i grupe apartmana",
+      "IMAGE_ALT": "Pregled Growth paketa s kompletnim vanjskim kadrom."
+    },
+    "SIGNATURE": {
+      "NAME": "Signature",
+      "DELIVERABLE": "50 finalnih fotografija",
+      "NOTE": "Potpuna vizualna pokrivenost za premium nekretnine",
+      "IMAGE_ALT": "Pregled Signature paketa s premium vecernjom atmosferom."
+    }
+  },
+  "CONTACT": {
+    "HEADING": "Spreman/na za vizualni upgrade svog oglasa?",
+    "INTRO": "Posalji lokaciju, tip nekretnine i zeljeni termin. Vracam se s personaliziranim foto prijedlogom za tvoj smjestaj."
+  },
+  "FOOTER": {
+    "COPY": "(c) {{year}} Horeca Frame. Fotografija smjestaja izradena za konverziju."
+  },
+  "BOOKING_MODAL": {
+    "HEADING": "Pokreni rezervaciju",
+    "INTRO": "Ispuni ove podatke, zatim nastavi u Google Form s unaprijed popunjenim poljima za brzu rezervaciju.",
+    "FIELD_PACKAGE": "Odabrani paket",
+    "FIELD_CONTACT": "Kontakt osoba",
+    "FIELD_PROPERTY": "Naziv objekta",
+    "FIELD_EMAIL": "Email",
+    "FIELD_PHONE": "Telefon",
+    "FIELD_URL": "Link/URL",
+    "FIELD_LOCATION": "Lokacija",
+    "FIELD_PERIOD": "Period",
+    "FIELD_NOTES": "Dodatne informacije",
+    "PLACEHOLDER_URL": "https://",
+    "PLACEHOLDER_NOTES": "Detalji o terminu, pristupu ili nekretnini",
+    "CTA_CONTINUE": "Nastavi u Google Form",
+    "CTA_CANCEL": "Odustani"
+  },
+  "A11Y": {
+    "PLATFORMS": "Podrzane platforme za oglasavanje",
+    "LOGO_AIRBNB": "Airbnb logo",
+    "LOGO_BOOKING": "Booking.com logo",
+    "LOGO_AGODA": "Agoda logo",
+    "STATS": "Poslovni pokazatelji",
+    "HERO_GALLERY": "Istaknuta galerija fotografija smjestaja",
+    "CLOSE_BOOKING_MODAL": "Zatvori obrazac za rezervaciju"
+  },
+  "IMAGES": {
+    "HERO_MAIN_ALT": "Vanjski pogled na smjestaj u toplom vecernjem svjetlu.",
+    "HERO_SECONDARY_ALT": "Vanjski pogled na Pensiunea Sophia s cvijecem.",
+    "GALLERY_1_ALT": "Svijetla soba prilagodena konverzijama na Airbnb-u i Bookingu.",
+    "GALLERY_2_ALT": "Cist kadar spavace sobe koji poboljsava jasnocu oglasa.",
+    "GALLERY_3_ALT": "Ugodan interijerski kut koji povecava povjerenje pri rezervaciji.",
+    "GALLERY_4_ALT": "Uravnotezena kompozicija koja naglasava udobnost i prostor.",
+    "GALLERY_5_ALT": "Kadar s prirodnim svjetlom pripremljen za ucinkovite oglase.",
+    "GALLERY_6_ALT": "Fotografija kupaonice koja gradi povjerenje gostiju.",
+    "GALLERY_7_ALT": "Premium detalji interijera za prezentaciju visoke razine.",
+    "GALLERY_8_ALT": "Styling sobe spreman za goste na booking platformama.",
+    "GALLERY_9_ALT": "Lifestyle kadar koji komunicira udobnost i kvalitetu.",
+    "GALLERY_10_ALT": "Perspektiva sobe osmisljena za privlacenje vise gostiju.",
+    "GALLERY_11_ALT": "Arhitektonski kadar koji podize percipiranu vrijednost nekretnine.",
+    "GALLERY_12_ALT": "Zavrsni premium kadar prikladan za naslovnicu Airbnb-a i Bookinga."
+  }
+}

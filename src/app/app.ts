@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 type PackageOffer = {
-  name: string;
+  nameKey: string;
   price: string;
-  deliverable: string;
-  note: string;
+  deliverableKey: string;
+  noteKey: string;
   googlePacketValue: 'Packet1' | 'Packet2' | 'Packet3';
   image: {
     src: string;
-    alt: string;
+    altKey: string;
   };
 };
 
@@ -16,6 +17,7 @@ type PackageOffer = {
   selector: 'app-root',
   templateUrl: './app.html',
   styleUrl: './app.scss',
+  imports: [TranslateModule],
 })
 export class App {
   protected readonly year = new Date().getFullYear();
@@ -38,127 +40,137 @@ export class App {
 
   protected readonly heroImage = {
     src: 'photos/Pensiunea Sophia-34.jpg',
-    alt: 'Exterior view of the accommodation with warm evening light.',
+    altKey: 'IMAGES.HERO_MAIN_ALT',
   };
 
   protected readonly heroShowcaseImages = [
     this.heroImage,
     {
       src: 'photos/Pensiunea Sophia-9.jpg',
-      alt: 'Pensiunea Sophia exterior view with flowers.',
+      altKey: 'IMAGES.HERO_SECONDARY_ALT',
     },
   ];
 
   protected readonly galleryImages = [
     {
       src: 'photos/Pensiunea Sophia-13.jpg',
-      alt: 'Bright guest room styled for Airbnb and Booking conversion.',
+      altKey: 'IMAGES.GALLERY_1_ALT',
     },
     {
       src: 'photos/Pensiunea Sophia-15.jpg',
-      alt: 'Clean bedroom framing that improves listing clarity.',
+      altKey: 'IMAGES.GALLERY_2_ALT',
     },
     {
       src: 'photos/Pensiunea Sophia-16.jpg',
-      alt: 'Inviting interior angle designed to increase booking trust.',
+      altKey: 'IMAGES.GALLERY_3_ALT',
     },
     {
       src: 'photos/Pensiunea Sophia-17.jpg',
-      alt: 'Balanced composition that highlights comfort and space.',
+      altKey: 'IMAGES.GALLERY_4_ALT',
     },
     {
       src: 'photos/Pensiunea Sophia-18.jpg',
-      alt: 'Natural-light room photo prepared for high-performing listings.',
+      altKey: 'IMAGES.GALLERY_5_ALT',
     },
     {
       src: 'photos/Pensiunea Sophia-19.jpg',
-      alt: 'Bathroom visual that supports guest confidence before booking.',
+      altKey: 'IMAGES.GALLERY_6_ALT',
     },
     {
       src: 'photos/Pensiunea Sophia-20.jpg',
-      alt: 'Refined interior details captured for premium presentation.',
+      altKey: 'IMAGES.GALLERY_7_ALT',
     },
     {
       src: 'photos/Pensiunea Sophia-21.jpg',
-      alt: 'Guest-ready room styling optimized for booking platforms.',
+      altKey: 'IMAGES.GALLERY_8_ALT',
     },
     {
       src: 'photos/Pensiunea Sophia-23.jpg',
-      alt: 'Lifestyle scene that communicates comfort and quality.',
+      altKey: 'IMAGES.GALLERY_9_ALT',
     },
     {
       src: 'photos/Pensiunea Sophia-24.jpg',
-      alt: 'Room perspective crafted to attract more customers.',
+      altKey: 'IMAGES.GALLERY_10_ALT',
     },
     {
       src: 'photos/Pensiunea Sophia-34.jpg',
-      alt: 'Architectural framing that improves perceived property value.',
+      altKey: 'IMAGES.GALLERY_11_ALT',
     },
     {
       src: 'photos/Pensiunea Sophia-49.jpg',
-      alt: 'Finishing showcase shot suitable for Airbnb and Booking covers.',
+      altKey: 'IMAGES.GALLERY_12_ALT',
     },
   ];
 
   protected readonly servicePoints = [
-    'Airbnb and Booking-optimized photo direction that improves listing performance',
-    'Composition and styling built to attract more customers and increase conversions',
-    'Fast delivery with web-ready exports and thumbnail-friendly crops',
+    'SERVICE_POINTS.ITEM_1',
+    'SERVICE_POINTS.ITEM_2',
+    'SERVICE_POINTS.ITEM_3',
   ];
 
   protected readonly workflow = [
     {
       step: '1',
-      title: 'Brief & Property Goals',
-      text: 'We align your audience, room mix, and unique selling points.',
+      titleKey: 'WORKFLOW.STEP_1_TITLE',
+      textKey: 'WORKFLOW.STEP_1_TEXT',
     },
     {
       step: '2',
-      title: 'On-site Photo Session',
-      text: 'Structured room-by-room coverage with angles that sell experience.',
+      titleKey: 'WORKFLOW.STEP_2_TITLE',
+      textKey: 'WORKFLOW.STEP_2_TEXT',
     },
     {
       step: '3',
-      title: 'Editing & Delivery',
-      text: 'Color-consistent retouching and optimized files ready for publishing.',
+      titleKey: 'WORKFLOW.STEP_3_TITLE',
+      textKey: 'WORKFLOW.STEP_3_TEXT',
     },
   ];
 
   protected readonly packages: PackageOffer[] = [
     {
-      name: 'Starter',
+      nameKey: 'PACKAGES.STARTER.NAME',
       price: '100 €',
-      deliverable: '15 final photos',
-      note: 'Ideal for studios and small guesthouses',
+      deliverableKey: 'PACKAGES.STARTER.DELIVERABLE',
+      noteKey: 'PACKAGES.STARTER.NOTE',
       googlePacketValue: 'Packet1',
       image: {
         src: 'photos/Pensiunea Sophia-15.jpg',
-        alt: 'Starter package preview photo for a cozy accommodation room.',
+        altKey: 'PACKAGES.STARTER.IMAGE_ALT',
       },
     },
     {
-      name: 'Growth',
+      nameKey: 'PACKAGES.GROWTH.NAME',
       price: '200 €',
-      deliverable: '30 final photos',
-      note: 'Best for medium accommodations and apartment groups',
+      deliverableKey: 'PACKAGES.GROWTH.DELIVERABLE',
+      noteKey: 'PACKAGES.GROWTH.NOTE',
       googlePacketValue: 'Packet2',
       image: {
         src: 'photos/Pensiunea Sophia-34.jpg',
-        alt: 'Growth package preview photo for a full property exterior angle.',
+        altKey: 'PACKAGES.GROWTH.IMAGE_ALT',
       },
     },
     {
-      name: 'Signature',
+      nameKey: 'PACKAGES.SIGNATURE.NAME',
       price: '500 €',
-      deliverable: '50 final photos',
-      note: 'Complete visual coverage for premium properties',
+      deliverableKey: 'PACKAGES.SIGNATURE.DELIVERABLE',
+      noteKey: 'PACKAGES.SIGNATURE.NOTE',
       googlePacketValue: 'Packet3',
       image: {
         src: 'photos/Pensiunea Sophia-49.jpg',
-        alt: 'Signature package preview photo with premium night ambiance.',
+        altKey: 'PACKAGES.SIGNATURE.IMAGE_ALT',
       },
     },
   ];
+
+  constructor(private readonly translate: TranslateService) {
+    this.translate.addLangs(['ro', 'en', 'hr']);
+    this.translate.setFallbackLang('en');
+    const browserLang = this.translate.getBrowserLang();
+    const activeLang = ['ro', 'en', 'hr'].includes(browserLang ?? '')
+      ? (browserLang ?? 'en')
+      : 'en';
+    this.translate.use(activeLang);
+  }
 
   protected openBookingModal(pack: PackageOffer): void {
     this.selectedPackage = pack;

@@ -1,0 +1,120 @@
+{
+  "BRAND": "Horeca Frame",
+  "NAV": {
+    "BOOK_SESSION": "Book a Session"
+  },
+  "HERO": {
+    "EYEBROW": "Airbnb & Booking Photography Services",
+    "TITLE": "Get More Customers on Airbnb and Booking With Photos That Convert",
+    "INTRO": "I help accommodation owners increase clicks, trust, and bookings with conversion-focused photography made specifically for Airbnb and Booking listings.",
+    "PLATFORM_PROOF": "Optimized for top booking channels",
+    "CTA_PORTFOLIO": "See Portfolio",
+    "CTA_PACKAGES": "View Packages"
+  },
+  "SERVICE_POINTS": {
+    "ITEM_1": "Airbnb and Booking-optimized photo direction that improves listing performance",
+    "ITEM_2": "Composition and styling built to attract more customers and increase conversions",
+    "ITEM_3": "Fast delivery with web-ready exports and thumbnail-friendly crops"
+  },
+  "STATS": {
+    "PREVIEW_DELIVERY": "First preview delivery",
+    "ENGAGEMENT_LIFT": "Typical listing engagement lift",
+    "WEB_READY": "Web-ready optimized files"
+  },
+  "WORKFLOW": {
+    "HEADING": "How We Work",
+    "STEP_LABEL": "Step",
+    "STEP_1_TITLE": "Brief & Property Goals",
+    "STEP_1_TEXT": "We align your audience, room mix, and unique selling points.",
+    "STEP_2_TITLE": "On-site Photo Session",
+    "STEP_2_TEXT": "Structured room-by-room coverage with angles that sell experience.",
+    "STEP_3_TITLE": "Editing & Delivery",
+    "STEP_3_TEXT": "Color-consistent retouching and optimized files ready for publishing."
+  },
+  "OWNER_ADVANTAGE": {
+    "EYEBROW": "Owner Advantage",
+    "HEADING": "Why We Need 3 Days On-Site and Why You Only Win",
+    "INTRO": "To photograph the full accommodation professionally, we need access to one room for 3 days. This gives us time to capture every angle, every lighting condition, and every detail across the property so your listing looks complete and premium.",
+    "BULLET_1": "Complete visual coverage of all rooms and guest areas.",
+    "BULLET_2": "Stronger listing quality that builds trust and increases clicks.",
+    "BULLET_3": "Higher booking potential and better pricing confidence.",
+    "BULLET_4": "A long-term photo library you can reuse across all channels.",
+    "CLOSE": "In short: the 3-day window helps us create photos that keep working for your business long after the shoot is done."
+  },
+  "PORTFOLIO": {
+    "HEADING": "Recent Accommodation Photos",
+    "SUB": "Real frames from your provided property set, presented as listing-ready visual storytelling."
+  },
+  "PACKAGES": {
+    "HEADING": "Packages for Every Property Size",
+    "SUB": "Simple, transparent options to match your accommodation goals and booking timeline.",
+    "CTA": "Book Package",
+    "STARTER": {
+      "NAME": "Starter",
+      "DELIVERABLE": "15 final photos",
+      "NOTE": "Ideal for studios and small guesthouses",
+      "IMAGE_ALT": "Starter package preview photo for a cozy accommodation room."
+    },
+    "GROWTH": {
+      "NAME": "Growth",
+      "DELIVERABLE": "30 final photos",
+      "NOTE": "Best for medium accommodations and apartment groups",
+      "IMAGE_ALT": "Growth package preview photo for a full property exterior angle."
+    },
+    "SIGNATURE": {
+      "NAME": "Signature",
+      "DELIVERABLE": "50 final photos",
+      "NOTE": "Complete visual coverage for premium properties",
+      "IMAGE_ALT": "Signature package preview photo with premium night ambiance."
+    }
+  },
+  "CONTACT": {
+    "HEADING": "Ready to Upgrade Your Listing Visuals?",
+    "INTRO": "Send your location, property type, and preferred schedule. I will reply with a tailored photography proposal for your accommodation."
+  },
+  "FOOTER": {
+    "COPY": "© {{year}} Horeca Frame. Accommodation photography crafted for conversion."
+  },
+  "BOOKING_MODAL": {
+    "HEADING": "Start Your Booking",
+    "INTRO": "Complete these details, then continue to Google Form with fields prefilled for faster booking.",
+    "FIELD_PACKAGE": "Selected package",
+    "FIELD_CONTACT": "Contact person",
+    "FIELD_PROPERTY": "Property name",
+    "FIELD_EMAIL": "Email",
+    "FIELD_PHONE": "Phone",
+    "FIELD_URL": "Link/URL",
+    "FIELD_LOCATION": "Location",
+    "FIELD_PERIOD": "Period",
+    "FIELD_NOTES": "Extra details",
+    "PLACEHOLDER_URL": "https://",
+    "PLACEHOLDER_NOTES": "Any timing, access, or property details",
+    "CTA_CONTINUE": "Continue To Google Form",
+    "CTA_CANCEL": "Cancel"
+  },
+  "A11Y": {
+    "PLATFORMS": "Listing platforms supported",
+    "LOGO_AIRBNB": "Airbnb logo",
+    "LOGO_BOOKING": "Booking.com logo",
+    "LOGO_AGODA": "Agoda logo",
+    "STATS": "Business highlights",
+    "HERO_GALLERY": "Featured accommodation photo highlights",
+    "CLOSE_BOOKING_MODAL": "Close booking form"
+  },
+  "IMAGES": {
+    "HERO_MAIN_ALT": "Exterior view of the accommodation with warm evening light.",
+    "HERO_SECONDARY_ALT": "Pensiunea Sophia exterior view with flowers.",
+    "GALLERY_1_ALT": "Bright guest room styled for Airbnb and Booking conversion.",
+    "GALLERY_2_ALT": "Clean bedroom framing that improves listing clarity.",
+    "GALLERY_3_ALT": "Inviting interior angle designed to increase booking trust.",
+    "GALLERY_4_ALT": "Balanced composition that highlights comfort and space.",
+    "GALLERY_5_ALT": "Natural-light room photo prepared for high-performing listings.",
+    "GALLERY_6_ALT": "Bathroom visual that supports guest confidence before booking.",
+    "GALLERY_7_ALT": "Refined interior details captured for premium presentation.",
+    "GALLERY_8_ALT": "Guest-ready room styling optimized for booking platforms.",
+    "GALLERY_9_ALT": "Lifestyle scene that communicates comfort and quality.",
+    "GALLERY_10_ALT": "Room perspective crafted to attract more customers.",
+    "GALLERY_11_ALT": "Architectural framing that improves perceived property value.",
+    "GALLERY_12_ALT": "Finishing showcase shot suitable for Airbnb and Booking covers."
+  }
+}

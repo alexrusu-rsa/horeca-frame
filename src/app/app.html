@@ -1,62 +1,61 @@
 <div class="page-shell">
   <header class="hero" id="top">
     <nav class="top-nav">
-      <p class="brand">Horeca Frame</p>
-      <a class="nav-cta" href="#contact">Book a Session</a>
+      <p class="brand">{{ 'BRAND' | translate }}</p>
+      <a class="nav-cta" href="#contact">{{ 'NAV.BOOK_SESSION' | translate }}</a>
     </nav>
 
     <div class="hero-grid">
-      <p class="eyebrow">Airbnb & Booking Photography Services</p>
+      <p class="eyebrow">{{ 'HERO.EYEBROW' | translate }}</p>
 
       <article class="hero-copy">
-        <h1>Get More Customers on Airbnb and Booking With Photos That Convert</h1>
+        <h1>{{ 'HERO.TITLE' | translate }}</h1>
         <p class="intro">
-          I help accommodation owners increase clicks, trust, and bookings with conversion-focused
-          photography made specifically for Airbnb and Booking listings.
+          {{ 'HERO.INTRO' | translate }}
         </p>
 
-        <div class="platform-proof" aria-label="Listing platforms supported">
-          <p>Optimized for top booking channels</p>
+        <div class="platform-proof" [attr.aria-label]="'A11Y.PLATFORMS' | translate">
+          <p>{{ 'HERO.PLATFORM_PROOF' | translate }}</p>
           <div class="platform-logos">
-            <img class="logo-airbnb" src="logos/airbnb-logo.svg" alt="Airbnb logo" width="126" height="39" loading="lazy" />
-            <img class="logo-booking" src="logos/booking.svg" alt="Booking.com logo" width="148" height="32" loading="lazy" />
-            <img class="logo-agoda" src="logos/agoda.png" alt="Agoda logo" width="120" height="60" loading="lazy" />
+            <img class="logo-airbnb" src="logos/airbnb-logo.svg" [alt]="'A11Y.LOGO_AIRBNB' | translate" width="126" height="39" loading="lazy" />
+            <img class="logo-booking" src="logos/booking.svg" [alt]="'A11Y.LOGO_BOOKING' | translate" width="148" height="32" loading="lazy" />
+            <img class="logo-agoda" src="logos/agoda.png" [alt]="'A11Y.LOGO_AGODA' | translate" width="120" height="60" loading="lazy" />
           </div>
         </div>
 
         <ul class="selling-points">
           @for (point of servicePoints; track point) {
-            <li>{{ point }}</li>
+            <li>{{ point | translate }}</li>
           }
         </ul>
 
         <div class="hero-actions">
-          <a class="btn btn-solid" href="#portfolio">See Portfolio</a>
-          <a class="btn btn-outline" href="#packages">View Packages</a>
+          <a class="btn btn-solid" href="#portfolio">{{ 'HERO.CTA_PORTFOLIO' | translate }}</a>
+          <a class="btn btn-outline" href="#packages">{{ 'HERO.CTA_PACKAGES' | translate }}</a>
         </div>
 
-        <div class="stats-row" aria-label="Business highlights">
+        <div class="stats-row" [attr.aria-label]="'A11Y.STATS' | translate">
           <div>
             <p class="stat-value">24h</p>
-            <p class="stat-label">First preview delivery</p>
+            <p class="stat-label">{{ 'STATS.PREVIEW_DELIVERY' | translate }}</p>
           </div>
           <div>
             <p class="stat-value">+35%</p>
-            <p class="stat-label">Typical listing engagement lift</p>
+            <p class="stat-label">{{ 'STATS.ENGAGEMENT_LIFT' | translate }}</p>
           </div>
           <div>
             <p class="stat-value">100%</p>
-            <p class="stat-label">Web-ready optimized files</p>
+            <p class="stat-label">{{ 'STATS.WEB_READY' | translate }}</p>
           </div>
         </div>
       </article>
 
-      <figure class="hero-visual" aria-label="Featured accommodation photo highlights">
+      <figure class="hero-visual" [attr.aria-label]="'A11Y.HERO_GALLERY' | translate">
         @for (image of heroShowcaseImages; track image.src; let i = $index) {
           <div class="hero-shot" [class.hero-shot-secondary]="i > 0">
             <img
               [src]="image.src"
-              [alt]="image.alt"
+              [alt]="image.altKey | translate"
               width="2048"
               height="1365"
               sizes="(max-width: 980px) 92vw, 46vw"
@@ -70,13 +69,13 @@
   </header>
 
   <section class="section workflow" aria-labelledby="workflow-heading">
-    <h2 id="workflow-heading">How We Work</h2>
+    <h2 id="workflow-heading">{{ 'WORKFLOW.HEADING' | translate }}</h2>
     <div class="workflow-grid">
-      @for (item of workflow; track item.title) {
+      @for (item of workflow; track item.titleKey) {
         <article class="workflow-card">
-          <p class="step">Step {{ item.step }}</p>
-          <h3>{{ item.title }}</h3>
-          <p>{{ item.text }}</p>
+          <p class="step">{{ 'WORKFLOW.STEP_LABEL' | translate }} {{ item.step }}</p>
+          <h3>{{ item.titleKey | translate }}</h3>
+          <p>{{ item.textKey | translate }}</p>
         </article>
       }
     </div>
@@ -84,32 +83,29 @@
 
   <section class="section owner-benefit" aria-labelledby="owner-benefit-heading">
     <div class="owner-benefit-panel">
-      <p class="eyebrow">Owner Advantage</p>
-      <h2 id="owner-benefit-heading">Why We Need 3 Days On-Site and Why You Only Win</h2>
+      <p class="eyebrow">{{ 'OWNER_ADVANTAGE.EYEBROW' | translate }}</p>
+      <h2 id="owner-benefit-heading">{{ 'OWNER_ADVANTAGE.HEADING' | translate }}</h2>
       <p>
-        To photograph the full accommodation professionally, we need access to one room for 3 days.
-        This gives us time to capture every angle, every lighting condition, and every detail across
-        the property so your listing looks complete and premium.
+        {{ 'OWNER_ADVANTAGE.INTRO' | translate }}
       </p>
 
       <ul class="owner-benefit-list">
-        <li>Complete visual coverage of all rooms and guest areas.</li>
-        <li>Stronger listing quality that builds trust and increases clicks.</li>
-        <li>Higher booking potential and better pricing confidence.</li>
-        <li>A long-term photo library you can reuse across all channels.</li>
+        <li>{{ 'OWNER_ADVANTAGE.BULLET_1' | translate }}</li>
+        <li>{{ 'OWNER_ADVANTAGE.BULLET_2' | translate }}</li>
+        <li>{{ 'OWNER_ADVANTAGE.BULLET_3' | translate }}</li>
+        <li>{{ 'OWNER_ADVANTAGE.BULLET_4' | translate }}</li>
       </ul>
 
       <p class="owner-benefit-close">
-        In short: the 3-day window helps us create photos that keep working for your business long
-        after the shoot is done.
+        {{ 'OWNER_ADVANTAGE.CLOSE' | translate }}
       </p>
     </div>
   </section>
 
   <section class="section portfolio" id="portfolio" aria-labelledby="portfolio-heading">
     <div class="section-heading">
-      <h2 id="portfolio-heading">Recent Accommodation Photos</h2>
-      <p>Real frames from your provided property set, presented as listing-ready visual storytelling.</p>
+      <h2 id="portfolio-heading">{{ 'PORTFOLIO.HEADING' | translate }}</h2>
+      <p>{{ 'PORTFOLIO.SUB' | translate }}</p>
     </div>
 
     <div class="gallery-grid">
@@ -117,7 +113,7 @@
         <figure class="gallery-item" [style.animationDelay.ms]="i * 70">
           <img
             [src]="image.src"
-            [alt]="image.alt"
+            [alt]="image.altKey | translate"
             width="2048"
             height="1365"
             sizes="(max-width: 640px) 96vw, (max-width: 1024px) 48vw, 31vw"
@@ -132,17 +128,17 @@
 
   <section class="section packages" id="packages" aria-labelledby="packages-heading">
     <div class="section-heading">
-      <h2 id="packages-heading">Packages for Every Property Size</h2>
-      <p>Simple, transparent options to match your accommodation goals and booking timeline.</p>
+      <h2 id="packages-heading">{{ 'PACKAGES.HEADING' | translate }}</h2>
+      <p>{{ 'PACKAGES.SUB' | translate }}</p>
     </div>
 
     <div class="package-grid">
-      @for (pack of packages; track pack.name) {
+      @for (pack of packages; track pack.nameKey) {
         <article class="package-card">
           <figure class="package-media">
             <img
               [src]="pack.image.src"
-              [alt]="pack.image.alt"
+              [alt]="pack.image.altKey | translate"
               width="2048"
               height="1365"
               loading="lazy"
@@ -152,13 +148,13 @@
           </figure>
           <div class="package-content">
             <div class="package-top">
-              <h3>{{ pack.name }}</h3>
+              <h3>{{ pack.nameKey | translate }}</h3>
               <p class="package-price">{{ pack.price }}</p>
             </div>
-            <p class="deliverable">{{ pack.deliverable }}</p>
-            <p>{{ pack.note }}</p>
+            <p class="deliverable">{{ pack.deliverableKey | translate }}</p>
+            <p>{{ pack.noteKey | translate }}</p>
             <button class="btn btn-solid package-book" type="button" (click)="openBookingModal(pack)">
-              Book Package
+              {{ 'PACKAGES.CTA' | translate }}
             </button>
           </div>
         </article>
@@ -168,10 +164,9 @@
 
   <section class="section contact" id="contact" aria-labelledby="contact-heading">
     <div class="contact-panel">
-      <h2 id="contact-heading">Ready to Upgrade Your Listing Visuals?</h2>
+      <h2 id="contact-heading">{{ 'CONTACT.HEADING' | translate }}</h2>
       <p>
-        Send your location, property type, and preferred schedule. I will reply with a tailored
-        photography proposal for your accommodation.
+        {{ 'CONTACT.INTRO' | translate }}
       </p>
       <div class="contact-actions">
         <a class="btn btn-solid" href="mailto:horecaframe@gmail.com">horecaframe@gmail.com</a>
@@ -181,70 +176,69 @@
   </section>
 
   <footer class="site-footer">
-    <p>© {{ year }} Horeca Frame. Accommodation photography crafted for conversion.</p>
+    <p>{{ 'FOOTER.COPY' | translate:{ year: year } }}</p>
   </footer>
 
   @if (isBookingModalOpen) {
     <div class="booking-modal-overlay" (click)="onModalOverlayClick($event)">
       <section class="booking-modal" role="dialog" aria-modal="true" aria-labelledby="booking-modal-heading">
-        <button type="button" class="modal-close" (click)="closeBookingModal()" aria-label="Close booking form">
+        <button type="button" class="modal-close" (click)="closeBookingModal()" [attr.aria-label]="'A11Y.CLOSE_BOOKING_MODAL' | translate">
           ×
         </button>
-        <h2 id="booking-modal-heading">Start Your Booking</h2>
+        <h2 id="booking-modal-heading">{{ 'BOOKING_MODAL.HEADING' | translate }}</h2>
         <p class="modal-intro">
-          Complete these details, then continue to Google Form with fields prefilled for faster
-          booking.
+          {{ 'BOOKING_MODAL.INTRO' | translate }}
         </p>
 
         <form class="booking-form" (submit)="submitBookingLead($event)">
           <label>
-            Packet ales
-            <input type="text" [value]="selectedPackage?.name ?? ''" readonly />
+            {{ 'BOOKING_MODAL.FIELD_PACKAGE' | translate }}
+            <input type="text" [value]="(selectedPackage?.nameKey ?? '') | translate" readonly />
           </label>
 
           <label>
-            Persoana contact
+            {{ 'BOOKING_MODAL.FIELD_CONTACT' | translate }}
             <input type="text" name="contactPerson" required />
           </label>
 
           <label>
-            Nume pensiune
+            {{ 'BOOKING_MODAL.FIELD_PROPERTY' | translate }}
             <input type="text" name="propertyName" required />
           </label>
 
           <label>
-            Email
+            {{ 'BOOKING_MODAL.FIELD_EMAIL' | translate }}
             <input type="email" name="email" required />
           </label>
 
           <label>
-            Telefon
+            {{ 'BOOKING_MODAL.FIELD_PHONE' | translate }}
             <input type="tel" name="phone" required />
           </label>
 
           <label>
-            Link/URL
-            <input type="url" name="listingUrl" placeholder="https://" />
+            {{ 'BOOKING_MODAL.FIELD_URL' | translate }}
+            <input type="url" name="listingUrl" [placeholder]="'BOOKING_MODAL.PLACEHOLDER_URL' | translate" />
           </label>
 
           <label>
-            Locatie
+            {{ 'BOOKING_MODAL.FIELD_LOCATION' | translate }}
             <input type="text" name="location" />
           </label>
 
           <label>
-            Perioada
+            {{ 'BOOKING_MODAL.FIELD_PERIOD' | translate }}
             <input type="date" name="period" required />
           </label>
 
           <label>
-            Alte informatii
-            <textarea name="notes" rows="3" placeholder="Any timing, access, or property details"></textarea>
+            {{ 'BOOKING_MODAL.FIELD_NOTES' | translate }}
+            <textarea name="notes" rows="3" [placeholder]="'BOOKING_MODAL.PLACEHOLDER_NOTES' | translate"></textarea>
           </label>
 
           <div class="modal-actions">
-            <button class="btn btn-solid" type="submit">Continue To Google Form</button>
-            <button class="btn btn-outline" type="button" (click)="closeBookingModal()">Cancel</button>
+            <button class="btn btn-solid" type="submit">{{ 'BOOKING_MODAL.CTA_CONTINUE' | translate }}</button>
+            <button class="btn btn-outline" type="button" (click)="closeBookingModal()">{{ 'BOOKING_MODAL.CTA_CANCEL' | translate }}</button>
           </div>
         </form>
       </section>
