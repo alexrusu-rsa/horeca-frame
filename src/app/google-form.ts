@@ -23,10 +23,6 @@ export async function submitToGoogleForm(data: BookingPayload): Promise<void> {
   payload.set('pageHistory', '0');
 
   for (const [key, value] of Object.entries(data)) {
-    if (!value) {
-      continue;
-    }
-
     const entryId = GOOGLE_FORM_CONFIG.groupFields[key];
     if (!entryId) {
       continue;
@@ -45,6 +41,7 @@ export async function submitToGoogleForm(data: BookingPayload): Promise<void> {
     payload.set(entryId, value);
   }
 
+  // Google Forms omits CORS headers; no-cors is required and response details are not readable client-side.
   await fetch(GOOGLE_FORM_CONFIG.formUrl, {
     method: 'POST',
     mode: 'no-cors',

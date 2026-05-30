@@ -246,7 +246,8 @@ export class App {
       form.reset();
       this.bookingStep = 4;
       this.launchConfetti();
-    } catch {
+    } catch (error) {
+      console.error('Google Form submission failed', error);
       this.submissionError.set('Could not submit the form. Please try again.');
     } finally {
       this.isSubmitting.set(false);
